@@ -1,0 +1,1097 @@
+// =====================================
+// Navigation and Mobile Menu
+// =====================================
+const navToggle = document.getElementById('navToggle');
+const navMenu = document.getElementById('navMenu');
+const navLinks = document.querySelectorAll('.nav-link');
+const header = document.getElementById('header');
+
+// Toggle mobile menu with accessibility
+if (navToggle) {
+    navToggle.addEventListener('click', () => {
+        const isActive = navMenu.classList.toggle('active');
+        navToggle.classList.toggle('active');
+        
+        // Update ARIA attribute
+        navToggle.setAttribute('aria-expanded', isActive);
+        
+        // Prevent body scroll when menu is open
+        if (isActive) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    });
+    
+    // Also support Enter key for accessibility
+    navToggle.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            navToggle.click();
+        }
+    });
+}
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (navMenu && navToggle) {
+        if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+        }
+    }
+});
+
+// Close mobile menu when clicking on a link
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        navToggle.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+        
+        // Update active link
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+    });
+});
+
+// Header scroll effect
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
+
+// =====================================
+// Smooth Scrolling
+// =====================================
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#' && document.querySelector(href)) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            const headerOffset = 80;
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// =====================================
+// Booking Form Trip Type Dropdown
+// =====================================
+const tripTypeSelect = document.getElementById('tripType');
+const returnDateGroup = document.getElementById('returnDateGroup');
+const returnDateInput = document.getElementById('returnDate');
+const dropLocationInput = document.getElementById('dropLocation');
+const dropLocationGroup = dropLocationInput ? dropLocationInput.closest('.form-group') : null;
+
+if (tripTypeSelect) {
+    tripTypeSelect.addEventListener('change', function() {
+        const selectedType = this.value;
+        
+        // Show/hide return date for round trip
+        if (selectedType === 'roundtrip') {
+            if (returnDateGroup) {
+                returnDateGroup.style.display = 'block';
+                returnDateInput.required = true;
+            }
+            if (dropLocationGroup) {
+                dropLocationGroup.style.display = 'block';
+                dropLocationInput.required = true;
+            }
+        } else if (selectedType === 'local') {
+            // For local trips, hide drop location and return date
+            if (returnDateGroup) {
+                returnDateGroup.style.display = 'none';
+                returnDateInput.required = false;
+            }
+            if (dropLocationGroup) {
+                dropLocationGroup.style.display = 'none';
+                dropLocationInput.required = false;
+            }
+            // Update drop location placeholder
+            if (dropLocationInput) {
+                dropLocationInput.placeholder = 'Local area (within city)';
+            }
+        } else {
+            // One way or airport - show drop location, hide return date
+            if (returnDateGroup) {
+                returnDateGroup.style.display = 'none';
+                returnDateInput.required = false;
+            }
+            if (dropLocationGroup) {
+                dropLocationGroup.style.display = 'block';
+                dropLocationInput.required = true;
+            }
+            if (dropLocationInput) {
+                dropLocationInput.placeholder = 'Enter drop location';
+            }
+        }
+        
+        console.log('Trip type selected:', selectedType);
+    });
+}
+
+// =====================================
+// Booking Form Submission
+// =====================================
+const bookingForm = document.getElementById('bookingForm');
+
+if (bookingForm) {
+    bookingForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Get form values
+        const tripType = document.getElementById('tripType').value;
+        const pickupLocation = document.getElementById('pickupLocation').value;
+        const dropLocation = document.getElementById('dropLocation').value;
+        const pickupDate = document.getElementById('pickupDate').value;
+        const pickupTime = document.getElementById('pickupTime').value;
+        const carType = document.getElementById('carType').value;
+        const mobileNumber = document.getElementById('mobileNumber').value;
+        const returnDate = document.getElementById('returnDate') ? document.getElementById('returnDate').value : '';
+        
+        // Get trip type text
+        const tripTypeText = document.getElementById('tripType').options[document.getElementById('tripType').selectedIndex].text;
+        const carTypeText = document.getElementById('carType').options[document.getElementById('carType').selectedIndex].text;
+        
+        // Validate mobile number
+        if (!mobileNumber.match(/^[0-9]{10}$/)) {
+            alert('Please enter a valid 10-digit mobile number');
+            return;
+        }
+        
+        // Create booking summary for WhatsApp
+        let message = `🚖 NEW BOOKING REQUEST\n\n`;
+        message += `Trip Type: ${tripTypeText}\n`;
+        message += `Pickup: ${pickupLocation}\n`;
+        if (tripType !== 'local') {
+            message += `Drop: ${dropLocation}\n`;
+        }
+        message += `Date: ${pickupDate} at ${pickupTime}\n`;
+        if (tripType === 'roundtrip' && returnDate) {
+            message += `Return: ${returnDate}\n`;
+        }
+        message += `Car: ${carTypeText}\n`;
+        message += `Mobile: ${mobileNumber}`;
+        
+        // Show success message
+        alert('✅ Booking request received! Redirecting to WhatsApp...');
+        
+        // Redirect to WhatsApp with booking details
+        const phoneNumber = '917488341848';
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+        
+        // Reset form
+        bookingForm.reset();
+    });
+}
+
+// =====================================
+// Contact Form Submission
+// =====================================
+const contactForm = document.getElementById('contactForm');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(contactForm);
+        const name = formData.get('name');
+        const phone = formData.get('phone');
+        const email = formData.get('email');
+        const service = formData.get('service');
+        const message = formData.get('message');
+        
+        // Here you would typically send the data to your server
+        alert('Thank you for contacting us! We will get back to you soon.');
+        
+        // Optionally send to WhatsApp
+        const phoneNumber = '917488341848';
+        const whatsappMessage = `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nService: ${service}\nMessage: ${message}`;
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+        
+        // Uncomment to redirect to WhatsApp
+        // window.open(whatsappUrl, '_blank');
+        
+        // Reset form
+        contactForm.reset();
+    });
+}
+
+// =====================================
+// Counter Animation
+// =====================================
+const counters = document.querySelectorAll('.stat-number');
+const speed = 200; // The lower the slower
+
+const animateCounters = () => {
+    counters.forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        const count = +counter.innerText;
+        const increment = target / speed;
+
+        if (count < target) {
+            counter.innerText = Math.ceil(count + increment);
+            setTimeout(() => animateCounters(), 1);
+        } else {
+            counter.innerText = target.toLocaleString();
+        }
+    });
+};
+
+// Intersection Observer for counter animation
+const observerOptions = {
+    threshold: 0.5,
+    rootMargin: '0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateCounters();
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+const statsSection = document.querySelector('.stats-section');
+if (statsSection) {
+    observer.observe(statsSection);
+}
+
+// =====================================
+// FAQ Accordion
+// =====================================
+const faqItems = document.querySelectorAll('.faq-item');
+
+faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    
+    question.addEventListener('click', () => {
+        // Close all other items
+        faqItems.forEach(otherItem => {
+            if (otherItem !== item) {
+                otherItem.classList.remove('active');
+            }
+        });
+        
+        // Toggle current item
+        item.classList.toggle('active');
+    });
+});
+
+// =====================================
+// Scroll to Top Button
+// =====================================
+const scrollTopBtn = document.getElementById('scrollTop');
+
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+        scrollTopBtn.classList.add('show');
+    } else {
+        scrollTopBtn.classList.remove('show');
+    }
+});
+
+scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// =====================================
+// Lazy Loading Images
+// =====================================
+const images = document.querySelectorAll('img[data-src]');
+
+const imageObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+            imageObserver.unobserve(img);
+        }
+    });
+});
+
+images.forEach(img => imageObserver.observe(img));
+
+// =====================================
+// Dynamic Date in Footer
+// =====================================
+const updateYear = () => {
+    const yearElements = document.querySelectorAll('.current-year');
+    const currentYear = new Date().getFullYear();
+    yearElements.forEach(element => {
+        element.textContent = currentYear;
+    });
+};
+
+updateYear();
+
+// =====================================
+// Form Input Validation
+// =====================================
+const validatePhone = (phone) => {
+    const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
+    return phoneRegex.test(phone);
+};
+
+const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+};
+
+// Add real-time validation to phone inputs
+const phoneInputs = document.querySelectorAll('input[type="tel"]');
+phoneInputs.forEach(input => {
+    input.addEventListener('blur', function() {
+        if (this.value && !validatePhone(this.value)) {
+            this.style.borderColor = 'var(--danger-color)';
+            this.setCustomValidity('Please enter a valid phone number');
+        } else {
+            this.style.borderColor = 'var(--success-color)';
+            this.setCustomValidity('');
+        }
+    });
+    
+    input.addEventListener('input', function() {
+        this.style.borderColor = '#e0e0e0';
+    });
+});
+
+// Add real-time validation to email inputs
+const emailInputs = document.querySelectorAll('input[type="email"]');
+emailInputs.forEach(input => {
+    input.addEventListener('blur', function() {
+        if (this.value && !validateEmail(this.value)) {
+            this.style.borderColor = 'var(--danger-color)';
+            this.setCustomValidity('Please enter a valid email address');
+        } else {
+            this.style.borderColor = 'var(--success-color)';
+            this.setCustomValidity('');
+        }
+    });
+    
+    input.addEventListener('input', function() {
+        this.style.borderColor = '#e0e0e0';
+    });
+});
+
+// =====================================
+// Booking Widget - Auto-fill Today's Date
+// =====================================
+const dateInputs = document.querySelectorAll('input[type="date"]');
+dateInputs.forEach(input => {
+    if (!input.value) {
+        const today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const yyyy = today.getFullYear();
+        input.value = `${yyyy}-${mm}-${dd}`;
+        input.min = `${yyyy}-${mm}-${dd}`;
+    }
+});
+
+// =====================================
+// Click to Call Analytics (Optional)
+// =====================================
+const callButtons = document.querySelectorAll('a[href^="tel:"]');
+callButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // Track call button clicks
+        console.log('Call button clicked:', button.getAttribute('href'));
+        
+        // If you're using Google Analytics, you can track this:
+        // gtag('event', 'click', {
+        //     'event_category': 'Contact',
+        //     'event_label': 'Phone Call',
+        //     'value': button.getAttribute('href')
+        // });
+    });
+});
+
+// =====================================
+// WhatsApp Link Analytics (Optional)
+// =====================================
+const whatsappButtons = document.querySelectorAll('a[href*="wa.me"]');
+whatsappButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // Track WhatsApp button clicks
+        console.log('WhatsApp button clicked');
+        
+        // If you're using Google Analytics:
+        // gtag('event', 'click', {
+        //     'event_category': 'Contact',
+        //     'event_label': 'WhatsApp',
+        // });
+    });
+});
+
+// =====================================
+// Testimonials Auto-rotate (Optional)
+// =====================================
+let currentTestimonial = 0;
+const testimonials = document.querySelectorAll('.testimonial-card');
+
+const rotateTestimonials = () => {
+    if (testimonials.length > 0) {
+        // Hide all testimonials
+        testimonials.forEach(card => {
+            card.style.display = 'none';
+        });
+        
+        // Show current testimonial
+        testimonials[currentTestimonial].style.display = 'block';
+        
+        // Move to next testimonial
+        currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+    }
+};
+
+// Uncomment to enable auto-rotation
+// setInterval(rotateTestimonials, 5000);
+
+// =====================================
+// Page Load Animation
+// =====================================
+window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+    
+    // Animate elements on scroll
+    const animateOnScroll = () => {
+        const elements = document.querySelectorAll('.service-card, .fleet-card, .why-card, .testimonial-card');
+        
+        elements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            const elementBottom = element.getBoundingClientRect().bottom;
+            
+            if (elementTop < window.innerHeight && elementBottom > 0) {
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }
+        });
+    };
+    
+    // Initial check
+    animateOnScroll();
+    
+    // Check on scroll
+    window.addEventListener('scroll', animateOnScroll);
+});
+
+// =====================================
+// Price Calculator (Optional Feature)
+// =====================================
+const calculatePrice = (distance, carType) => {
+    const rates = {
+        'hatchback': 9,
+        'sedan': 10,
+        'suv': 12,
+        'innova': 15
+    };
+    
+    const baseRate = rates[carType] || 10;
+    const price = distance * baseRate;
+    const driverAllowance = distance > 250 ? 300 : 0;
+    
+    return {
+        basePrice: price,
+        driverAllowance: driverAllowance,
+        totalPrice: price + driverAllowance
+    };
+};
+
+// Example usage:
+// const estimate = calculatePrice(300, 'sedan');
+// console.log('Estimated Price:', estimate.totalPrice);
+
+// =====================================
+// Local Storage for Repeat Customers
+// =====================================
+const saveCustomerInfo = (data) => {
+    localStorage.setItem('customerInfo', JSON.stringify(data));
+};
+
+const loadCustomerInfo = () => {
+    const saved = localStorage.getItem('customerInfo');
+    return saved ? JSON.parse(saved) : null;
+};
+
+// Auto-fill form with saved customer info
+const autoFillForms = () => {
+    const savedInfo = loadCustomerInfo();
+    
+    if (savedInfo) {
+        const nameInputs = document.querySelectorAll('input[type="text"][placeholder*="Name"]');
+        const phoneInputs = document.querySelectorAll('input[type="tel"]');
+        const emailInputs = document.querySelectorAll('input[type="email"]');
+        
+        nameInputs.forEach(input => {
+            if (!input.value && savedInfo.name) {
+                input.value = savedInfo.name;
+            }
+        });
+        
+        phoneInputs.forEach(input => {
+            if (!input.value && savedInfo.phone) {
+                input.value = savedInfo.phone;
+            }
+        });
+        
+        emailInputs.forEach(input => {
+            if (!input.value && savedInfo.email) {
+                input.value = savedInfo.email;
+            }
+        });
+    }
+};
+
+// Call auto-fill on page load
+setTimeout(autoFillForms, 500);
+
+// =====================================
+// Instant Fare Calculator
+// =====================================
+const calcBtn = document.getElementById('calcBtn');
+const fareResult = document.getElementById('fareResult');
+const fareAmount = document.getElementById('fareAmount');
+
+if (calcBtn) {
+    calcBtn.addEventListener('click', function() {
+        const from = document.getElementById('calcFrom').value;
+        const to = document.getElementById('calcTo').value;
+        const carRate = document.getElementById('calcCar').value;
+        
+        if (!from || !to) {
+            alert('Please select both pickup and drop locations');
+            return;
+        }
+        
+        // Distance mapping (in km)
+        const distances = {
+            'ranchi-jamshedpur': 130,
+            'ranchi-patna': 330,
+            'ranchi-kolkata': 420,
+            'ranchi-bokaro': 110,
+            'airport-jamshedpur': 135,
+            'airport-patna': 335,
+            'airport-kolkata': 425,
+            'airport-bokaro': 115,
+            'railway-jamshedpur': 132,
+            'railway-patna': 328,
+            'railway-kolkata': 418,
+            'railway-bokaro': 108
+        };
+        
+        const routeKey = `${from}-${to}`;
+        const distance = distances[routeKey] || 100;
+        const rate = parseInt(carRate);
+        
+        // Calculate fare: (distance * rate) + driver allowance
+        const driverAllowance = Math.ceil(distance / 300) * 300; // ₹300 per day
+        const totalFare = (distance * rate) + driverAllowance;
+        
+        // Display result with animation
+        fareAmount.textContent = `₹${totalFare.toLocaleString()}`;
+        fareResult.style.display = 'block';
+        
+        // Smooth scroll to result
+        fareResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+}
+
+// =====================================
+// Live Booking Counter Animation
+// =====================================
+const liveBookings = document.getElementById('liveBookings');
+
+if (liveBookings) {
+    function updateBookingCount() {
+        const min = 18;
+        const max = 35;
+        const randomCount = Math.floor(Math.random() * (max - min + 1)) + min;
+        
+        liveBookings.style.opacity = '0';
+        setTimeout(() => {
+            liveBookings.textContent = randomCount;
+            liveBookings.style.opacity = '1';
+        }, 300);
+    }
+    
+    // Update every 30 seconds
+    setInterval(updateBookingCount, 30000);
+}
+
+// =====================================
+// Keyboard Shortcuts
+// =====================================
+document.addEventListener('keydown', (e) => {
+    // Press 'C' to open call
+    if (e.key === 'c' && !e.ctrlKey && !e.metaKey) {
+        const callButton = document.querySelector('a[href^="tel:"]');
+        if (callButton && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+            e.preventDefault();
+            callButton.click();
+        }
+    }
+    
+    // Press 'W' to open WhatsApp
+    if (e.key === 'w' && !e.ctrlKey && !e.metaKey) {
+        const whatsappButton = document.querySelector('.whatsapp-float');
+        if (whatsappButton && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+            e.preventDefault();
+            whatsappButton.click();
+        }
+    }
+});
+
+// =====================================
+// Print Functionality
+// =====================================
+const printPage = () => {
+    window.print();
+};
+
+// =====================================
+// Share Functionality (Web Share API)
+// =====================================
+const shareWebsite = async () => {
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                title: 'Car Rental Ranchi',
+                text: 'Best taxi service in Ranchi - Affordable car rentals for local and outstation trips',
+                url: window.location.href
+            });
+        } catch (err) {
+            console.log('Error sharing:', err);
+        }
+    } else {
+        // Fallback: Copy to clipboard
+        navigator.clipboard.writeText(window.location.href);
+        alert('Link copied to clipboard!');
+    }
+};
+
+// =====================================
+// Performance Monitoring
+// =====================================
+window.addEventListener('load', () => {
+    // Calculate and log page load time
+    const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
+    console.log('Page loaded in:', loadTime, 'ms');
+    
+    // If using Google Analytics, you can send this data:
+    // gtag('event', 'timing_complete', {
+    //     'name': 'load',
+    //     'value': loadTime,
+    //     'event_category': 'Performance'
+    // });
+});
+
+// =====================================
+// Offline Detection
+// =====================================
+window.addEventListener('online', () => {
+    console.log('Back online');
+    // You can show a notification here
+});
+
+window.addEventListener('offline', () => {
+    console.log('Connection lost');
+    alert('You are currently offline. Some features may not work properly.');
+});
+
+// =====================================
+// Console Welcome Message
+// =====================================
+console.log('%c🚗 Car Rental Ranchi', 'font-size: 20px; font-weight: bold; color: #ff6b35;');
+console.log('%cWelcome to our website! Need a taxi? Call us at +917488341848', 'font-size: 14px; color: #004e89;');
+
+// =====================================
+// Initialize everything when DOM is ready
+// =====================================
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('Website initialized successfully!');
+    
+    // Any additional initialization code can go here
+});
+
+// =====================================
+// Enhanced UI/UX Features - 2026
+// =====================================
+
+// Scroll Progress Indicator
+function updateScrollProgress() {
+    const scrollProgress = document.querySelector('.scroll-progress');
+    if (!scrollProgress) {
+        // Create progress bar if it doesn't exist
+        const progressBar = document.createElement('div');
+        progressBar.className = 'scroll-progress';
+        document.body.appendChild(progressBar);
+    }
+    
+    const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    const progressBar = document.querySelector('.scroll-progress');
+    if (progressBar) {
+        progressBar.style.width = scrolled + '%';
+    }
+}
+
+window.addEventListener('scroll', updateScrollProgress);
+
+// Scroll Animations
+function revealOnScroll() {
+    const elements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right');
+    
+    elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementBottom = element.getBoundingClientRect().bottom;
+        const isVisible = (elementTop < window.innerHeight - 100) && (elementBottom > 0);
+        
+        if (isVisible) {
+            element.classList.add('visible');
+        }
+    });
+}
+
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
+
+// Back to Top Button
+function createBackToTopButton() {
+    if (!document.querySelector('.back-to-top')) {
+        const backToTop = document.createElement('div');
+        backToTop.className = 'back-to-top';
+        backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
+        backToTop.setAttribute('aria-label', 'Back to top');
+        document.body.appendChild(backToTop);
+        
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+    
+    const backToTop = document.querySelector('.back-to-top');
+    if (window.pageYOffset > 300) {
+        backToTop.classList.add('visible');
+    } else {
+        backToTop.classList.remove('visible');
+    }
+}
+
+window.addEventListener('scroll', createBackToTopButton);
+window.addEventListener('load', createBackToTopButton);
+
+// Floating WhatsApp Button - DISABLED (Using HTML static buttons instead to avoid duplicates)
+// function createFloatingWhatsApp() {
+//     if (!document.querySelector('.floating-whatsapp')) {
+//         const whatsappBtn = document.createElement('a');
+//         whatsappBtn.href = 'https://wa.me/917488341848?text=Hi,%20I%20need%20a%20taxi';
+//         whatsappBtn.target = '_blank';
+//         whatsappBtn.className = 'floating-whatsapp';
+//         whatsappBtn.innerHTML = '<i class="fab fa-whatsapp"></i>';
+//         whatsappBtn.setAttribute('aria-label', 'Contact us on WhatsApp');
+//         document.body.appendChild(whatsappBtn);
+//     }
+// }
+
+// window.addEventListener('load', createFloatingWhatsApp);
+
+// Image Lightbox
+function initLightbox() {
+    // Create lightbox element if it doesn't exist
+    if (!document.querySelector('.lightbox')) {
+        const lightbox = document.createElement('div');
+        lightbox.className = 'lightbox';
+        lightbox.innerHTML = `
+            <span class="lightbox-close">&times;</span>
+            <img class="lightbox-content" src="" alt="Lightbox image">
+        `;
+        document.body.appendChild(lightbox);
+        
+        // Close lightbox on click
+        lightbox.addEventListener('click', (e) => {
+            if (e.target.classList.contains('lightbox') || e.target.classList.contains('lightbox-close')) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+    
+    // Add click handlers to gallery images
+    const galleryImages = document.querySelectorAll('.gallery-item img, .place-image');
+    galleryImages.forEach(img => {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', () => {
+            const lightbox = document.querySelector('.lightbox');
+            const lightboxImg = document.querySelector('.lightbox-content');
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt || 'Gallery image';
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+}
+
+window.addEventListener('load', initLightbox);
+
+// Animated Counter
+function animateCounter(element, target, duration = 2000) {
+    let current = 0;
+    const increment = target / (duration / 16);
+    
+    const updateCounter = () => {
+        current += increment;
+        if (current < target) {
+            element.textContent = Math.floor(current).toLocaleString();
+            requestAnimationFrame(updateCounter);
+        } else {
+            element.textContent = target.toLocaleString();
+        }
+    };
+    
+    updateCounter();
+}
+
+// Initialize counters when visible
+function initCounters() {
+    const counters = document.querySelectorAll('.stat-number');
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                entry.target.classList.add('counted');
+                const target = parseInt(entry.target.getAttribute('data-target'));
+                if (!isNaN(target)) {
+                    animateCounter(entry.target, target);
+                }
+            }
+        });
+    }, observerOptions);
+    
+    counters.forEach(counter => observer.observe(counter));
+}
+
+window.addEventListener('load', initCounters);
+
+// Lazy Loading Images
+function lazyLoadImages() {
+    const images = document.querySelectorAll('img[data-src]');
+    
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.getAttribute('data-src');
+                img.removeAttribute('data-src');
+                img.classList.remove('skeleton');
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+}
+
+window.addEventListener('load', lazyLoadImages);
+
+// Reading Time Estimator
+function calculateReadingTime() {
+    const article = document.querySelector('.city-hero-content, article, main');
+    if (article) {
+        const text = article.textContent;
+        const wordsPerMinute = 200;
+        const wordCount = text.trim().split(/\s+/).length;
+        const readingTime = Math.ceil(wordCount / wordsPerMinute);
+        
+        // Display reading time if element exists
+        const readingTimeElement = document.querySelector('.reading-time');
+        if (readingTimeElement) {
+            readingTimeElement.textContent = `${readingTime} min read`;
+        }
+    }
+}
+
+window.addEventListener('load', calculateReadingTime);
+
+// Smooth Scroll for Anchor Links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#' && href !== '#!' && document.querySelector(href)) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            const offsetTop = target.offsetTop - 80;
+            
+            window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// Print Page Function
+function printPage() {
+    window.print();
+}
+
+// Share on Social Media
+function shareOnSocial(platform) {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    
+    let shareUrl = '';
+    
+    switch(platform) {
+        case 'facebook':
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            break;
+        case 'twitter':
+            shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+            break;
+        case 'linkedin':
+            shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${title}`;
+            break;
+        case 'whatsapp':
+            shareUrl = `https://wa.me/?text=${title}%20${url}`;
+            break;
+    }
+    
+    if (shareUrl) {
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+    }
+}
+
+// Copy to Clipboard
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        // Show success message
+        showToast('Copied to clipboard!');
+    }).catch(err => {
+        console.error('Failed to copy:', err);
+    });
+}
+
+// Toast Notification
+function showToast(message, duration = 3000) {
+    // Remove existing toast if any
+    const existingToast = document.querySelector('.toast-notification');
+    if (existingToast) {
+        existingToast.remove();
+    }
+    
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.textContent = message;
+    toast.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #333;
+        color: white;
+        padding: 15px 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        z-index: 10000;
+        animation: slideUp 0.3s ease;
+    `;
+    
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.style.animation = 'slideDown 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+    }, duration);
+}
+
+// Add slideUp and slideDown animations
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideUp {
+        from {
+            transform: translateX(-50%) translateY(100px);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideDown {
+        from {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(-50%) translateY(100px);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
+
+// Parallax Effect for Hero Background
+function parallaxEffect() {
+    const hero = document.querySelector('.city-hero, .hero');
+    if (hero) {
+        const scrolled = window.pageYOffset;
+        hero.style.backgroundPositionY = scrolled * 0.5 + 'px';
+    }
+}
+
+window.addEventListener('scroll', parallaxEffect);
+
+// Device Detection
+function detectDevice() {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isTablet = /iPad|Android/i.test(navigator.userAgent) && window.innerWidth >= 768;
+    
+    document.body.classList.add(isMobile ? 'is-mobile' : 'is-desktop');
+    if (isTablet) {
+        document.body.classList.add('is-tablet');
+    }
+}
+
+window.addEventListener('load', detectDevice);
+
+console.log('%c✨ Enhanced UI/UX Features Loaded!', 'font-size: 14px; color: #4facfe; font-weight: bold;');
+

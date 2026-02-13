@@ -1,0 +1,23 @@
+# User-agent: *
+# Allow all robots to index the site
+
+User-agent: *
+Allow: /
+
+# Disallow admin and private directories (if any)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+
+# Allow Google bots specifically
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.carrentalranchi.com/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1

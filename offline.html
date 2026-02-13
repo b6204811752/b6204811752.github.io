@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Offline - Car Rental Ranchi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #fff;
+        }
+        
+        .offline-container {
+            text-align: center;
+            max-width: 600px;
+        }
+        
+        .offline-icon {
+            font-size: 120px;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        .offline-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid #fff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-primary {
+            background: #ff6b35;
+            border-color: #ff6b35;
+        }
+        
+        .btn-primary:hover {
+            background: #ff8c61;
+            border-color: #ff8c61;
+        }
+        
+        .contact-info {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 15px;
+        }
+        
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            margin: 10px 0;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .offline-icon {
+                font-size: 80px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">📡</div>
+        <h1>You're Offline</h1>
+        <p>Looks like you've lost your internet connection. Don't worry, you can still contact us directly!</p>
+        
+        <div class="offline-actions">
+            <button class="btn btn-primary" onclick="window.location.reload()">
+                🔄 Try Again
+            </button>
+            <a href="/" class="btn">
+                🏠 Go to Homepage
+            </a>
+        </div>
+        
+        <div class="contact-info">
+            <h3>📞 Contact Us Directly</h3>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
+                <a href="tel:+917488341848" class="contact-link">
+                    📱 Call: +91-7488341848
+                </a>
+                <a href="https://wa.me/917488341848" class="contact-link">
+                    💬 WhatsApp: +91-7488341848
+                </a>
+                <a href="mailto:Carrentalranchi01@gmail.com" class="contact-link">
+                    ✉️ Email: Carrentalranchi01@gmail.com
+                </a>
+            </div>
+        </div>
+        
+        <p style="margin-top: 30px; font-size: 0.9rem; opacity: 0.7;">
+            Car Rental Ranchi - Ranchi's Most Trusted Taxi Service
+        </p>
+    </div>
+    
+    <script>
+        // Auto-retry when connection is restored
+        window.addEventListener('online', () => {
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        });
+        
+        // Check connection status
+        function updateStatus() {
+            if (navigator.onLine) {
+                window.location.reload();
+            }
+        }
+        
+        // Check every 5 seconds
+        setInterval(updateStatus, 5000);
+    </script>
+</body>
+</html>
