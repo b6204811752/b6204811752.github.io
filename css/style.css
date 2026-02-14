@@ -46,6 +46,8 @@ html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-size-adjust: 100%;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 body {
@@ -57,12 +59,17 @@ body {
     -webkit-tap-highlight-color: transparent;
     text-rendering: optimizeLegibility;
     font-display: swap;
+    width: 100%;
+    min-width: 320px;
+    position: relative;
 }
 
 .container {
     max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
     padding: 0 20px;
+    box-sizing: border-box;
 }
 
 img {
@@ -3126,19 +3133,20 @@ button:focus:not(:focus-visible) {
     
     .whatsapp-float,
     .call-float {
-        width: 56px;
-        height: 56px;
+        width: 50px;
+        height: 50px;
+        bottom: 80px;
         font-size: 1.5rem;
     }
     
     .whatsapp-float {
         bottom: 20px;
-        right: 16px;
+        right: 10px;
     }
     
     .call-float {
-        bottom: 90px;
-        right: 16px;
+        bottom: 85px;
+        right: 10px;
     }
     
     .whatsapp-badge {
@@ -3149,10 +3157,10 @@ button:focus:not(:focus-visible) {
     }
     
     .scroll-top {
-        bottom: 20px;
-        left: 20px;
-        width: 48px;
-        height: 48px;
+        bottom: 10px;
+        left: 10px;
+        width: 50px;
+        height: 50px;
         font-size: 1.3rem;
     }
     
