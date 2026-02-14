@@ -17,18 +17,6 @@
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
-    },
-    {
-      "src": "/images/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/images/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
     }
   ],
   "shortcuts": [
@@ -45,10 +33,10 @@
       ]
     },
     {
-      "name": "Call Us",
-      "short_name": "Call",
-      "description": "Call +917488341848",
-      "url": "/tel:+917488341848",
+      "name": "Contact Us",
+      "short_name": "Contact",
+      "description": "Get in touch",
+      "url": "/#contact",
       "icons": [
         {
           "src": "/favicon.svg",
@@ -57,37 +45,20 @@
       ]
     },
     {
-      "name": "WhatsApp",
-      "short_name": "WhatsApp",
-      "description": "Chat on WhatsApp",
-      "url": "/https://wa.me/917488341848",
+      "name": "Our Fleet",
+      "short_name": "Cars",
+      "description": "View our vehicles",
+      "url": "/#fleet",
       "icons": [
         {
           "src": "/favicon.svg",
           "sizes": "96x96"
         }
       ]
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "/images/screenshot-mobile.jpg",
-      "type": "image/jpeg",
-      "sizes": "540x720",
-      "form_factor": "narrow"
-    },
-    {
-      "src": "/images/screenshot-desktop.jpg",
-      "type": "image/jpeg",
-      "sizes": "1280x720",
-      "form_factor": "wide"
     }
   ],
   "related_applications": [],
   "prefer_related_applications": false,
-  "iarc_rating_id": "",
-  "permissions": ["geolocation"],
-  "features": ["geolocation", "notifications"],
   "edge_side_panel": {
     "preferred_width": 400
   }

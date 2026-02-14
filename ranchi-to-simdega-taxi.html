@@ -103,6 +103,9 @@
     </script>
 </head>
 <body>
+    <!-- Skip to main content -->
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+    
     <!-- Header -->
     <header class="header">
         <nav class="navbar">
@@ -134,15 +137,15 @@
     </header>
 
     <!-- City Hero Section -->
-    <section class="city-hero" style="background-image: linear-gradient(135deg, rgba(12,20,69,0.85), rgba(255,107,53,0.75)), url('https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=1200&h=600&fit=crop&auto=format');background-size:cover;background-position:center;">
+    <section class="city-hero" style="background-image: linear-gradient(135deg, rgba(12,20,69,0.85), rgba(255,107,53,0.75)), url('https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=1200&h=600&fit=crop&auto=format');background-size:cover;background-position:center;" id="main-content">
         <div class="city-hero-overlay"></div>
         <div class="container">
             <div class="city-hero-content">
                 <div class="breadcrumb">
-                    <a href="index.html">Home</a> <span>/</span> <span>Ranchi to Simdega Taxi</span>
+                    <a href="index.html">Home</a> <i class="fas fa-chevron-right"></i> <span>Ranchi to Simdega Taxi</span>
                 </div>
-                <h1>Ranchi to Simdega Taxi Service</h1>
-                <p class="city-subtitle">Tribal Heritage & Natural Beauty - Dams, Rivers & Culture</p>
+                <h1 class="city-hero-title">Ranchi to Simdega Taxi Service</h1>
+                <p class="city-hero-subtitle">Tribal Heritage & Natural Beauty - Dams, Rivers & Culture</p>
                 <div class="city-features-badges">
                     <div class="feature-badge">
                         <i class="fas fa-road"></i>
@@ -161,15 +164,20 @@
                         <span>24/7 Available</span>
                     </div>
                 </div>
-                <a href="https://wa.me/917488341848?text=Hi,%20I%20want%20to%20book%20a%20taxi%20from%20Ranchi%20to%20Simdega" class="cta-button" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Book Now on WhatsApp
-                </a>
+                                <div class="city-hero-buttons">
+                    <a href="https://wa.me/917488341848?text=Hi,%20I%20want%20to%20book%20taxi%20from%20Ranchi%20to%20simdega" class="btn btn-primary" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Book Now on WhatsApp
+                    </a>
+                    <a href="tel:+917488341848" class="btn btn-outline">
+                        <i class="fas fa-phone"></i> Call +91-7488341848
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Fare Cards Section -->
-    <section class="fare-section">
+    <section class="city-fare-section">
         <div class="container">
             <h2 class="section-title">Choose Your Ride</h2>
             <div class="fare-cards">
@@ -263,36 +271,36 @@
     </section>
 
     <!-- Why Choose Us -->
-    <section class="why-choose-section">
+    <section class="city-why-section">
         <div class="container">
             <h2 class="section-title">Why Choose Our Simdega Taxi Service?</h2>
             <div class="why-choose-grid">
-                <div class="why-card">
+                <div class="why-card-city">
                     <i class="fas fa-mountain"></i>
                     <h3>Tribal Route Experts</h3>
                     <p>Drivers familiar with Simdega's hilly terrain and tribal areas</p>
                 </div>
-                <div class="why-card">
+                <div class="why-card-city">
                     <i class="fas fa-shield-alt"></i>
                     <h3>Safe & Reliable</h3>
                     <p>Well-maintained vehicles for comfortable hilly road journey</p>
                 </div>
-                <div class="why-card">
+                <div class="why-card-city">
                     <i class="fas fa-rupee-sign"></i>
                     <h3>Transparent Pricing</h3>
                     <p>Fixed fares with no hidden charges. All inclusive packages</p>
                 </div>
-                <div class="why-card">
+                <div class="why-card-city">
                     <i class="fas fa-clock"></i>
                     <h3>24/7 Service</h3>
                     <p>Available anytime for tribal tours and dam visits</p>
                 </div>
-                <div class="why-card">
+                <div class="why-card-city">
                     <i class="fas fa-calendar-check"></i>
                     <h3>Flexible Packages</h3>
                     <p>One way, round trip, or cultural tour packages available</p>
                 </div>
-                <div class="why-card">
+                <div class="why-card-city">
                     <i class="fas fa-headset"></i>
                     <h3>Customer Support</h3>
                     <p>Dedicated support team available throughout your journey</p>
@@ -514,3 +522,5 @@
     <script src="js/enhanced-3d.js"></script>
 </body>
 </html>
+
+

@@ -103,6 +103,9 @@
     </script>
 </head>
 <body>
+    <!-- Skip to main content -->
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+    
     <!-- Header -->
     <header class="header">
         <nav class="navbar">
@@ -134,15 +137,15 @@
     </header>
 
     <!-- City Hero Section -->
-    <section class="city-hero" style="background-image: linear-gradient(135deg, rgba(12,20,69,0.85), rgba(255,107,53,0.75)), url('https://images.unsplash.com/photo-1545468800-85cc9bc6ecf7?w=1200&h=600&fit=crop&auto=format');background-size:cover;background-position:center;">
+    <section class="city-hero" style="background-image: linear-gradient(135deg, rgba(12,20,69,0.85), rgba(255,107,53,0.75)), url('https://images.unsplash.com/photo-1545468800-85cc9bc6ecf7?w=1200&h=600&fit=crop&auto=format');background-size:cover;background-position:center;" id="main-content">
         <div class="city-hero-overlay"></div>
         <div class="container">
             <div class="city-hero-content">
                 <div class="breadcrumb">
-                    <a href="index.html">Home</a> <span>/</span> <span>Ranchi to Deoghar Taxi</span>
+                    <a href="index.html">Home</a> <i class="fas fa-chevron-right"></i> <span>Ranchi to Deoghar Taxi</span>
                 </div>
-                <h1>Ranchi to Deoghar Taxi Service</h1>
-                <p class="city-subtitle">Premium Cab to Baidyanath Dham - Pilgrimage Made Comfortable</p>
+                <h1 class="city-hero-title">Ranchi to Deoghar Taxi Service</h1>
+                <p class="city-hero-subtitle">Premium Cab to Baidyanath Dham - Pilgrimage Made Comfortable</p>
                 <div class="city-features-badges">
                     <div class="feature-badge">
                         <i class="fas fa-road"></i>
@@ -161,15 +164,20 @@
                         <span>24/7 Available</span>
                     </div>
                 </div>
-                <a href="https://wa.me/917488341848?text=Hi,%20I%20want%20to%20book%20a%20taxi%20from%20Ranchi%20to%20Deoghar" class="cta-button" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Book Now on WhatsApp
-                </a>
+                                <div class="city-hero-buttons">
+                    <a href="https://wa.me/917488341848?text=Hi,%20I%20want%20to%20book%20taxi%20from%20Ranchi%20to%20deoghar" class="btn btn-primary" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Book Now on WhatsApp
+                    </a>
+                    <a href="tel:+917488341848" class="btn btn-outline">
+                        <i class="fas fa-phone"></i> Call +91-7488341848
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Fare Cards Section -->
-    <section class="fare-section">
+    <section class="city-fare-section">
         <div class="container">
             <h2 class="section-title">Choose Your Ride</h2>
             <div class="fare-cards">
@@ -263,36 +271,36 @@
     </section>
 
     <!-- Why Choose Us -->
-    <section class="why-choose-section">
+    <section class="city-why-section">
         <div class="container">
             <h2 class="section-title">Why Choose Our Deoghar Taxi Service?</h2>
             <div class="why-choose-grid">
-                <div class="why-card">
+                <div class="why-card-city">
                     <i class="fas fa-praying-hands"></i>
                     <h3>Pilgrimage Specialists</h3>
                     <p>Experienced drivers familiar with all temples and pilgrimage routes in Deoghar</p>
                 </div>
-                <div class="why-card">
+                <div class="why-card-city">
                     <i class="fas fa-shield-alt"></i>
                     <h3>Safe & Reliable</h3>
                     <p>Well-maintained vehicles with verified drivers for a secure journey</p>
                 </div>
-                <div class="why-card">
+                <div class="why-card-city">
                     <i class="fas fa-rupee-sign"></i>
                     <h3>Transparent Pricing</h3>
                     <p>No hidden charges. What you see is what you pay</p>
                 </div>
-                <div class="why-card">
+                <div class="why-card-city">
                     <i class="fas fa-clock"></i>
                     <h3>24/7 Service</h3>
                     <p>Book anytime, available for early morning pilgrimage trips</p>
                 </div>
-                <div class="why-card">
+                <div class="why-card-city">
                     <i class="fas fa-calendar-check"></i>
                     <h3>Flexible Booking</h3>
                     <p>One way, round trip, or multi-day packages available</p>
                 </div>
-                <div class="why-card">
+                <div class="why-card-city">
                     <i class="fas fa-headset"></i>
                     <h3>Customer Support</h3>
                     <p>Dedicated support team available throughout your journey</p>
@@ -307,7 +315,7 @@
             <h2 class="section-title">Places to Visit in Deoghar</h2>
             <div class="places-grid">
                 <div class="place-card">
-                    <img src="https://images.unsplash.com/photo-1545468800-85cc9bc6ecf7?w=400&h=300&fit=crop&auto=format" alt="Baidyanath Temple" class="place-card-img" loading="lazy">
+                    <img src="images/cities/Baidyanath-Temple_Deoghar.webp" alt="Baidyanath Temple" class="place-card-img" loading="lazy">
                     <h3>Baidyanath Temple</h3>
                     <p>One of the 12 Jyotirlingas of Lord Shiva. Most sacred pilgrimage site attracting millions of devotees during Shravan month.</p>
                 </div>
@@ -317,7 +325,7 @@
                     <p>Beautiful hills with India's highest ropeway. Panoramic views and temples at the summit. Perfect for family picnics.</p>
                 </div>
                 <div class="place-card">
-                    <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=400&h=300&fit=crop&auto=format" alt="Naulakha Mandir" class="place-card-img" loading="lazy">
+                    <img src="images/cities/Naulakha-Mandir-Deoghar.jpg" alt="Naulakha Mandir" class="place-card-img" loading="lazy">
                     <h3>Naulakha Mandir</h3>
                     <p>Stunning white marble temple costing 9 lakhs during construction. Beautiful architecture inspired by Belur Math.</p>
                 </div>
@@ -327,7 +335,7 @@
                     <p>Serene location with caves and temples. Believed to be the meditation spot of Maharishi Valmiki. Natural springs and peaceful environment.</p>
                 </div>
                 <div class="place-card">
-                    <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=400&h=300&fit=crop&auto=format" alt="Basukinath Temple" class="place-card-img" loading="lazy">
+                    <img src="images/cities/basukinath-temple-Deoghar.jpg" alt="Basukinath Temple" class="place-card-img" loading="lazy">
                     <h3>Basukinath Temple</h3>
                     <p>Ancient Shiva temple 42 km from Deoghar. Completes the Baidyanath pilgrimage circuit. Peaceful surroundings and natural beauty.</p>
                 </div>
@@ -417,7 +425,7 @@
             </div>
             <div class="gallery-grid">
                 <div class="destination-image-card">
-                    <img src="https://images.unsplash.com/photo-1545468800-85cc9bc6ecf7?w=600&h=400&fit=crop&auto=format" alt="Baidyanath Temple Deoghar" loading="lazy">
+                    <img src="images/cities/Baidyanath-Temple_Deoghar.webp" alt="Baidyanath Temple Deoghar" loading="lazy">
                     <div class="card-overlay">
                         <h3>Baidyanath Temple</h3>
                         <p>One of 12 Jyotirlingas</p>
@@ -514,3 +522,5 @@
     <script src="js/enhanced-3d.js"></script>
 </body>
 </html>
+
+

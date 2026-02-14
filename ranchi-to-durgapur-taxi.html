@@ -98,8 +98,12 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/enhanced-3d.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body>
+    <!-- Skip to main content -->
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+    
     <!-- Header -->
     <header class="header">
         <nav class="navbar">
@@ -130,19 +134,17 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="city-hero" style="background-image: linear-gradient(135deg, rgba(12,20,69,0.85), rgba(255,107,53,0.75)), url('https://images.unsplash.com/photo-1513828583688-c52646db42da?w=1200&h=600&fit=crop&auto=format');background-size:cover;background-position:center;">
+    <!-- City Route Hero Section -->
+    <section class="city-hero" style="background-image: linear-gradient(135deg, rgba(12,20,69,0.85), rgba(255,107,53,0.75)), url('https://images.unsplash.com/photo-1513828583688-c52646db42da?w=1200&h=600&fit=crop&auto=format');background-size:cover;background-position:center;" id="main-content">
+        <div class="city-hero-overlay"></div>
         <div class="container">
-            <nav class="breadcrumb">
-                <a href="index.html">Home</a>
-                <i class="fas fa-chevron-right"></i>
-                <a href="index.html#service-areas">City Routes</a>
-                <i class="fas fa-chevron-right"></i>
-                <span>Ranchi to Durgapur</span>
-            </nav>
-            
-            <h1 class="city-hero-title">Ranchi to Durgapur Taxi Service</h1>
-            <p class="city-hero-subtitle">Premium Cab Service - Comfortable, Safe & Affordable</p>
+            <div class="city-hero-content">
+                <div class="breadcrumb">
+                    <a href="index.html">Home</a> <i class="fas fa-chevron-right"></i> 
+                    <span>Ranchi to Durgapur Taxi</span>
+                </div>
+                <h1 class="city-hero-title">Ranchi to Durgapur Taxi Service</h1>
+                <p class="city-hero-subtitle">Book One Way & Round Trip Cab | 240 KM | Starting at ₹2,880</p>
             
             <div class="city-hero-features">
                 <div class="feature-badge">
@@ -175,19 +177,20 @@
                 </div>
             </div>
             
-            <div class="hero-cta">
-                <a href="https://wa.me/917488341848?text=Hi, I want to book Ranchi to Durgapur taxi" class="btn-primary">
-                    <i class="fab fa-whatsapp"></i> Book on WhatsApp
-                </a>
-                <a href="tel:+917488341848" class="btn-secondary">
-                    <i class="fas fa-phone"></i> Call +91-7488341848
-                </a>
+                <div class="city-hero-buttons">
+                    <a href="https://wa.me/917488341848?text=Hi,%20I%20want%20to%20book%20taxi%20from%20Ranchi%20to%20Durgapur" class="btn btn-primary" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Book Now on WhatsApp
+                    </a>
+                    <a href="tel:+917488341848" class="btn btn-outline">
+                        <i class="fas fa-phone"></i> Call +91-7488341848
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Fare Cards -->
-    <section class="fare-section">
+    <!-- Quick Fare Calculator -->
+    <section class="city-fare-section">
         <div class="container">
             <h2 class="section-title">Choose Your Ride</h2>
             <p class="section-subtitle">Select from our range of well-maintained AC cars</p>
@@ -266,22 +269,22 @@
             <h2 class="section-title">Route Information</h2>
             
             <div class="route-info-grid">
-                <div class="info-card">
+                <div class="route-info-card">
                     <i class="fas fa-road"></i>
                     <h3>Best Route</h3>
                     <p>Via NH33 & NH14</p>
                 </div>
-                <div class="info-card">
+                <div class="route-info-card">
                     <i class="fas fa-map-marked-alt"></i>
                     <h3>Stops En Route</h3>
                     <p>Ramgarh, Purulia, Bankura</p>
                 </div>
-                <div class="info-card">
+                <div class="route-info-card">
                     <i class="fas fa-utensils"></i>
                     <h3>Food Stops</h3>
                     <p>Purulia, Bankura</p>
                 </div>
-                <div class="info-card">
+                <div class="route-info-card">
                     <i class="fas fa-gas-pump"></i>
                     <h3>Fuel Stations</h3>
                     <p>Available throughout</p>
@@ -297,37 +300,37 @@
     </section>
 
     <!-- Why Choose Us -->
-    <section class="why-section-city">
+    <section class="city-why-section">
         <div class="container">
             <h2 class="section-title">Why Choose Us?</h2>
             
             <div class="why-grid-city">
-                <div class="why-card">
+                <div class="why-card-city">
                     <i class="fas fa-shield-alt"></i>
                     <h3>Safe & Secure</h3>
                     <p>Verified drivers, GPS tracking, 24/7 support</p>
                 </div>
-                <div class="why-card">
+                <div class="why-card-city">
                     <i class="fas fa-indian-rupee-sign"></i>
                     <h3>Best Rates</h3>
                     <p>Transparent pricing, no hidden charges</p>
                 </div>
-                <div class="why-card">
+                <div class="why-card-city">
                     <i class="fas fa-clock"></i>
                     <h3>On-Time Pickup</h3>
                     <p>Punctual service, doorstep pickup</p>
                 </div>
-                <div class="why-card">
+                <div class="why-card-city">
                     <i class="fas fa-car-wash"></i>
                     <h3>Clean Cars</h3>
                     <p>Well-maintained, sanitized vehicles</p>
                 </div>
-                <div class="why-card">
+                <div class="why-card-city">
                     <i class="fas fa-route"></i>
                     <h3>Flexible Routes</h3>
                     <p>Stop anywhere, customize your journey</p>
                 </div>
-                <div class="why-card">
+                <div class="why-card-city">
                     <i class="fas fa-headset"></i>
                     <h3>24/7 Support</h3>
                     <p>Always available for assistance</p>
@@ -393,7 +396,7 @@
         <div class="container">
             <h2 class="section-title">Frequently Asked Questions</h2>
             
-            <div class="faq-list">
+            <div class="faq-container">
                 <div class="faq-item">
                     <div class="faq-question">
                         <h3>What is the distance from Ranchi to Durgapur?</h3>
@@ -553,7 +556,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2024 Car Rental Ranchi. All Rights Reserved.</p>
+                <p>&copy; 2026 Car Rental Ranchi. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
@@ -575,3 +578,6 @@
     <script src="js/enhanced-3d.js"></script>
 </body>
 </html>
+
+
+

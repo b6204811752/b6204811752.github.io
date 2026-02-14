@@ -9,6 +9,10 @@ Disallow: /admin/
 Disallow: /private/
 Disallow: /temp/
 
+# Disallow template and documentation files
+Disallow: /ENHANCED-HTML-TEMPLATE.html
+Disallow: /*.md$
+
 # Allow Google bots specifically
 User-agent: Googlebot
 Allow: /

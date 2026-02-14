@@ -1,7 +1,7 @@
 // Service Worker for Car Rental Ranchi
-// Version 1.0.0 - Progressive Web App
+// Version 1.1.0 - Progressive Web App - Updated February 14, 2026
 
-const CACHE_NAME = 'car-rental-ranchi-v1';
+const CACHE_NAME = 'car-rental-ranchi-v2';
 const urlsToCache = [
     '/',
     '/index.html',
