@@ -1166,27 +1166,6 @@ function initCounters() {
 
 window.addEventListener('load', initCounters);
 
-// Lazy Loading Images
-function lazyLoadImages() {
-    const images = document.querySelectorAll('img[data-src]');
-    
-    const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.getAttribute('data-src');
-                img.removeAttribute('data-src');
-                img.classList.remove('skeleton');
-                imageObserver.unobserve(img);
-            }
-        });
-    });
-    
-    images.forEach(img => imageObserver.observe(img));
-}
-
-window.addEventListener('load', lazyLoadImages);
-
 // Reading Time Estimator
 function calculateReadingTime() {
     const article = document.querySelector('.city-hero-content, article, main');
@@ -1222,11 +1201,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
-
-// Print Page Function
-function printPage() {
-    window.print();
-}
 
 // Share on Social Media
 function shareOnSocial(platform) {

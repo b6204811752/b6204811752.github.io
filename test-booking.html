@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Booking Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .booking-form-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h3 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: 600;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .test-info {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .console-output {
+            background: #000;
+            color: #0f0;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-info">
+        <h4>🧪 Booking Form Test Page</h4>
+        <p><strong>Purpose:</strong> Test if the booking form submission works correctly</p>
+        <p><strong>Instructions:</strong> Fill the form below and click "Get Instant Quote"</p>
+        <p><strong>Check Console:</strong> Open browser console (F12) to see debug logs</p>
+    </div>
+
+    <div class="booking-form-card">
+        <h3>📋 Book Your Taxi Now</h3>
+        <form id="bookingForm" class="booking-form" onsubmit="return false;">
+            <div class="form-group">
+                <label><i class="fas fa-route"></i> Trip Type</label>
+                <select id="tripType" required>
+                    <option value="oneway">One Way Trip</option>
+                    <option value="roundtrip">Round Trip</option>
+                    <option value="local">Local Rental (Hourly)</option>
+                    <option value="airport">Airport Transfer</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-calendar"></i> Pickup Date</label>
+                <input type="date" id="pickupDate" required>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-map-marker-alt"></i> Pickup Location</label>
+                <input type="text" id="pickupLocation" placeholder="Enter pickup location" required>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-map-marker-alt"></i> Drop Location</label>
+                <input type="text" id="dropLocation" placeholder="Enter drop location" required>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-clock"></i> Pickup Time</label>
+                <input type="time" id="pickupTime" required>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-phone"></i> Mobile Number (10 digits)</label>
+                <input type="tel" id="mobileNumber" placeholder="9999999999" pattern="[0-9]{10}" required>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-car"></i> Car Type</label>
+                <select id="carType" required>
+                    <option value="">Select Car Type</option>
+                    <option value="sedan">Sedan</option>
+                    <option value="ertiga">MUV</option>
+                    <option value="innova">SUV</option>
+                    <option value="luxury">Luxury</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="returnDateGroup" style="display: none;">
+                <label><i class="fas fa-calendar-check"></i> Return Date</label>
+                <input type="date" id="returnDate">
+            </div>
+
+            <button type="submit" class="btn btn-submit">
+                <i class="fas fa-paper-plane"></i> Get Instant Quote
+            </button>
+            
+            <!-- Success Message -->
+            <div id="bookingSuccessMessage" style="display:none; margin-top: 20px; padding: 15px; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 8px; color: #155724; text-align: center;">
+                <i class="fas fa-check-circle" style="font-size: 24px; color: #28a745;"></i>
+                <p style="margin: 10px 0 0 0; font-weight: 600;">Booking Submitted Successfully!</p>
+                <p style="margin: 5px 0 0 0; font-size: 0.9rem;">We will contact you shortly to confirm your booking.</p>
+            </div>
+        </form>
+    </div>
+
+    <div class="console-output" id="consoleOutput">
+        <div><strong>Console Output:</strong></div>
+        <div id="logs"></div>
+    </div>
+
+    <script>
+        // Capture console logs
+        const logsDiv = document.getElementById('logs');
+        const originalLog = console.log;
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            const logEntry = document.createElement('div');
+            logEntry.textContent = args.join(' ');
+            logsDiv.appendChild(logEntry);
+            logsDiv.parentElement.scrollTop = logsDiv.parentElement.scrollHeight;
+        };
+
+        // Set default date to tomorrow
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        document.getElementById('pickupDate').value = tomorrow.toISOString().split('T')[0];
+        
+        // Pre-fill for quick testing
+        document.getElementById('pickupLocation').value = 'Ranchi';
+        document.getElementById('dropLocation').value = 'Jamshedpur';
+        document.getElementById('pickupTime').value = '10:00';
+        document.getElementById('mobileNumber').value = '9999999999';
+        document.getElementById('carType').value = 'sedan';
+    </script>
+    
+    <!-- Load the actual script -->
+    <script src="js/script.js"></script>
+</body>
+</html>
