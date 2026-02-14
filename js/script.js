@@ -520,8 +520,9 @@ faqItems.forEach(item => {
 });
 
 // =====================================
-// Scroll to Top Button
+// Scroll to Top Button - DISABLED (button removed)
 // =====================================
+/*
 const scrollTopBtn = document.getElementById('scrollTop');
 
 if (scrollTopBtn) {
@@ -542,6 +543,7 @@ if (scrollTopBtn) {
         });
     });
 }
+*/
 
 // =====================================
 // Lazy Loading Images - Optimized
