@@ -204,10 +204,16 @@ p {
    ===================================== */
 /* Top Bar */
 .top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     background: var(--dark-color);
     color: var(--white);
     padding: 10px 0;
     font-size: 0.85rem;
+    z-index: 1001;
+    transition: var(--transition);
 }
 
 .top-bar-content {
@@ -338,7 +344,7 @@ p {
                 url('../images/hero-bg.jpg') center/cover no-repeat;
     display: flex;
     align-items: center;
-    padding-top: 80px;
+    padding-top: 120px;
     overflow: hidden;
 }
 
@@ -2689,7 +2695,7 @@ button:focus:not(:focus-visible) {
     }
 }
 
-}
+
 
 /* Medium tablets */
 @media (max-width: 900px) {
@@ -3376,7 +3382,7 @@ button:focus:not(:focus-visible) {
                 url('../images/hero-bg.jpg') center/cover no-repeat;
     display: flex;
     align-items: center;
-    padding: 140px 0 80px;
+    padding: 160px 0 80px;
     overflow: hidden;
 }
 
