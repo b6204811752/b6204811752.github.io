@@ -3189,6 +3189,7 @@ button:focus:not(:focus-visible) {
         height: 50px;
         font-size: 1.3rem;
         box-sizing: border-box;
+        z-index: 10004 !important;
     }
     
     .live-chat-indicator {
@@ -6383,6 +6384,9 @@ button:focus:not(:focus-visible) {
         right: auto !important;
         bottom: 15px !important;
         box-sizing: border-box !important;
+        z-index: 10004 !important;
+        width: 50px !important;
+        height: 50px !important;
     }
     
     /* Nav menu safe positioning */
