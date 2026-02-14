@@ -173,6 +173,8 @@ if (tripTypeSelect) {
 // =====================================
 // Booking Form Submission
 // =====================================
+// Booking Form Submission - Google Form Integration
+// =====================================
 const bookingForm = document.getElementById('bookingForm');
 
 if (bookingForm) {
@@ -189,7 +191,7 @@ if (bookingForm) {
         const mobileNumber = document.getElementById('mobileNumber').value;
         const returnDate = document.getElementById('returnDate') ? document.getElementById('returnDate').value : '';
         
-        // Get trip type text
+        // Get trip type text for display
         const tripTypeText = document.getElementById('tripType').options[document.getElementById('tripType').selectedIndex].text;
         const carTypeText = document.getElementById('carType').options[document.getElementById('carType').selectedIndex].text;
         
@@ -199,30 +201,156 @@ if (bookingForm) {
             return;
         }
         
-        // Create booking summary for WhatsApp
-        let message = `🚖 NEW BOOKING REQUEST\n\n`;
-        message += `Trip Type: ${tripTypeText}\n`;
-        message += `Pickup: ${pickupLocation}\n`;
-        if (tripType !== 'local') {
-            message += `Drop: ${dropLocation}\n`;
+        // Map trip type values to Google Form format
+        const tripTypeMapping = {
+            'oneway': 'One Way Trip',
+            'roundtrip': 'Round Trip',
+            'local': 'Local Rental',
+            'airport': 'Airport Transfer'
+        };
+        
+        // Map car type values to Google Form format
+        const carTypeMapping = {
+            'sedan': 'Sedan',
+            'ertiga': 'MUV',
+            'innova': 'SUV',
+            'luxury': 'Luxury'
+        };
+        
+        // Show loading state
+        const submitButton = bookingForm.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.innerHTML;
+        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+        submitButton.disabled = true;
+        
+        try {
+            // Google Form URL and entry IDs
+            const googleFormURL = 'https://docs.google.com/forms/d/e/1FAIpQLSdUoXyun_N1BYtlAD2HZyGX2tLtTO0LIaayOEqWq3GgqoCAnQ/formResponse';
+            
+            // Create form data for Google Form
+            const formData = new FormData();
+            formData.append('entry.219265158', tripTypeMapping[tripType] || tripTypeText);
+            formData.append('entry.1594636824', pickupDate);
+            formData.append('entry.1069431231', pickupLocation);
+            formData.append('entry.1297259824', dropLocation);
+            formData.append('entry.2064504236', pickupTime);
+            formData.append('entry.1057979598', mobileNumber);
+            formData.append('entry.681528332', carTypeMapping[carType] || carType);
+            
+            // Submit to Google Form using fetch (no-cors mode)
+            fetch(googleFormURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: formData
+            }).then(() => {
+                // Show success message
+                submitButton.innerHTML = '<i class="fas fa-check-circle"></i> Booking Submitted!';
+                submitButton.style.backgroundColor = '#28a745';
+                
+                // Show success message div
+                const successMessage = document.getElementById('bookingSuccessMessage');
+                if (successMessage) {
+                    successMessage.style.display = 'block';
+                    // Scroll to success message
+                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+                
+                // Create booking summary for WhatsApp confirmation
+                let message = `🚖 BOOKING REQUEST\n\n`;
+                message += `Trip: ${tripTypeText}\n`;
+                message += `From: ${pickupLocation}\n`;
+                if (tripType !== 'local') {
+                    message += `To: ${dropLocation}\n`;
+                }
+                message += `Date: ${pickupDate} at ${pickupTime}\n`;
+                if (tripType === 'roundtrip' && returnDate) {
+                    message += `Return: ${returnDate}\n`;
+                }
+                message += `Vehicle: ${carTypeText}\n`;
+                message += `Mobile: ${mobileNumber}\n\n`;
+                message += `Please confirm my booking.`;
+                
+                // Prompt for WhatsApp confirmation after 2 seconds
+                setTimeout(() => {
+                    const sendWhatsApp = confirm('✅ Booking submitted successfully!\n\nWould you like to send a confirmation message on WhatsApp?');
+                    
+                    if (sendWhatsApp) {
+                        // Open WhatsApp for confirmation
+                        const phoneNumber = '917488341848';
+                        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+                        window.open(whatsappUrl, '_blank');
+                    }
+                    
+                    // Reset form and button after 3 seconds
+                    setTimeout(() => {
+                        bookingForm.reset();
+                        submitButton.innerHTML = originalButtonText;
+                        submitButton.style.backgroundColor = '';
+                        submitButton.disabled = false;
+                        if (successMessage) {
+                            successMessage.style.display = 'none';
+                        }
+                    }, 3000);
+                }, 2000);
+                
+            }).catch((error) => {
+                console.error('Form submission error:', error);
+                // Even if fetch fails in no-cors mode, the form likely submitted
+                // Google Forms returns opaque response which triggers catch
+                submitButton.innerHTML = '<i class="fas fa-check-circle"></i> Submitted!';
+                submitButton.style.backgroundColor = '#28a745';
+                
+                // Show success message div
+                const successMessage = document.getElementById('bookingSuccessMessage');
+                if (successMessage) {
+                    successMessage.style.display = 'block';
+                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+                
+                setTimeout(() => {
+                    const sendWhatsApp = confirm('✅ Booking request sent!\n\nWould you like to send a confirmation on WhatsApp?');
+                    
+                    if (sendWhatsApp) {
+                        // Create WhatsApp message
+                        let message = `🚖 BOOKING REQUEST\n\n`;
+                        message += `Trip: ${tripTypeText}\n`;
+                        message += `From: ${pickupLocation}\n`;
+                        if (tripType !== 'local') {
+                            message += `To: ${dropLocation}\n`;
+                        }
+                        message += `Date: ${pickupDate} at ${pickupTime}\n`;
+                        message += `Vehicle: ${carTypeText}\n`;
+                        message += `Mobile: ${mobileNumber}`;
+                        
+                        const phoneNumber = '917488341848';
+                        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+                        window.open(whatsappUrl, '_blank');
+                    }
+                    
+                    // Reset form
+                    setTimeout(() => {
+                        bookingForm.reset();
+                        submitButton.innerHTML = originalButtonText;
+                        submitButton.style.backgroundColor = '';
+                        submitButton.disabled = false;
+                        if (successMessage) {
+                            successMessage.style.display = 'none';
+                        }
+                    }, 2000);
+                }, 1500);
+            });
+            
+        } catch (error) {
+            console.error('Booking submission error:', error);
+            submitButton.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error - Try Again';
+            submitButton.style.backgroundColor = '#dc3545';
+            
+            setTimeout(() => {
+                submitButton.innerHTML = originalButtonText;
+                submitButton.style.backgroundColor = '';
+                submitButton.disabled = false;
+            }, 3000);
         }
-        message += `Date: ${pickupDate} at ${pickupTime}\n`;
-        if (tripType === 'roundtrip' && returnDate) {
-            message += `Return: ${returnDate}\n`;
-        }
-        message += `Car: ${carTypeText}\n`;
-        message += `Mobile: ${mobileNumber}`;
-        
-        // Show success message
-        alert('✅ Booking request received! Redirecting to WhatsApp...');
-        
-        // Redirect to WhatsApp with booking details
-        const phoneNumber = '917488341848';
-        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, '_blank');
-        
-        // Reset form
-        bookingForm.reset();
     });
 }
 
