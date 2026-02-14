@@ -2040,6 +2040,28 @@ footer {
     margin-bottom: 20px;
 }
 
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.footer-logo {
+    height: 55px;
+    width: auto;
+    max-width: 70px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.footer-brand h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: var(--white);
+    white-space: nowrap;
+}
+
 .footer-column p,
 .footer-section p {
     color: rgba(255, 255, 255, 0.7);
@@ -2761,6 +2783,15 @@ button:focus:not(:focus-visible) {
         font-size: 1.5rem;
     }
     
+    .footer-logo {
+        height: 50px;
+        max-width: 65px;
+    }
+    
+    .footer-brand h3 {
+        font-size: 1.35rem;
+    }
+    
     .hero-title {
         font-size: 2.8rem;
     }
@@ -2831,6 +2862,15 @@ button:focus:not(:focus-visible) {
     .logo .tagline {
         font-size: 0.75rem;
     }
+    
+    .footer-logo {
+        height: 46px;
+        max-width: 60px;
+    }
+    
+    .footer-brand h3 {
+        font-size: 1.3rem;
+    }
 }
 
 
@@ -2893,6 +2933,19 @@ button:focus:not(:focus-visible) {
     
     .logo .tagline {
         font-size: 0.7rem;
+    }
+    
+    .footer-brand {
+        gap: 10px;
+    }
+    
+    .footer-logo {
+        height: 42px;
+        max-width: 55px;
+    }
+    
+    .footer-brand h3 {
+        font-size: 1.2rem;
     }
     
     .top-bar {
@@ -3133,6 +3186,28 @@ button:focus:not(:focus-visible) {
         grid-template-columns: 1fr;
     }
     
+    .footer-brand {
+        gap: 12px;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .footer-logo {
+        height: 45px;
+        max-width: 58px;
+    }
+    
+    .footer-brand h3 {
+        font-size: 1.25rem;
+    }
+    
+    .footer-column,
+    .footer-col,
+    .footer-section {
+        text-align: center;
+    }
+    
     .footer-bottom-content {
         flex-direction: column;
         gap: 20px;
@@ -3231,6 +3306,19 @@ button:focus:not(:focus-visible) {
     
     .logo .tagline {
         font-size: 0.65rem;
+    }
+    
+    .footer-brand {
+        gap: 10px;
+    }
+    
+    .footer-logo {
+        height: 38px;
+        max-width: 50px;
+    }
+    
+    .footer-brand h3 {
+        font-size: 1.15rem;
     }
     
     .fleet-grid {
