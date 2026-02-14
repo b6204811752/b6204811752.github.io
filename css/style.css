@@ -2094,9 +2094,9 @@ footer {
 }
 
 /* =====================================
-   Float Buttons
+   Float Buttons - DISABLED (using floating-actions-container instead)
    ===================================== */
-.whatsapp-float,
+/*.whatsapp-float,
 .call-float {
     position: fixed;
     bottom: 30px;
@@ -2127,7 +2127,7 @@ footer {
 .whatsapp-float:hover,
 .call-float:hover {
     transform: scale(1.1);
-}
+}*/
 
 /* =====================================
    Scroll to Top Button
@@ -2493,8 +2493,8 @@ footer {
     transform: scale(1.05);
 }
 
-/* Enhanced WhatsApp Button */
-.whatsapp-float {
+/* Enhanced WhatsApp Button - Disabled (using floating-actions-container instead) */
+/*.whatsapp-float {
     position: fixed;
     bottom: 30px;
     right: 30px;
@@ -2511,7 +2511,7 @@ footer {
     transition: var(--transition);
     animation: pulse 2s infinite;
     background: #25D366;
-}
+}*/
 
 .whatsapp-badge {
     position: absolute;
@@ -2535,7 +2535,7 @@ footer {
     }
 }
 
-.whatsapp-float:hover {
+/*.whatsapp-float:hover {
     transform: scale(1.15);
     background: #20BA5A;
 }
@@ -2557,9 +2557,9 @@ footer {
     transition: var(--transition);
     animation: ring 2s infinite;
     background: var(--primary-color);
-}
+}*/
 
-@keyframes ring {
+/*@keyframes ring {
     0%, 100% {
         transform: rotate(0deg);
     }
@@ -2569,7 +2569,7 @@ footer {
     20%, 40% {
         transform: rotate(10deg);
     }
-}
+}*/
 
 .live-chat-indicator {
     position: fixed;
@@ -3150,7 +3150,8 @@ button:focus:not(:focus-visible) {
         padding: 14px 12px;
     }
     
-    .whatsapp-float,
+    /* Standalone button mobile styles - DISABLED (using floating-actions-container) */
+    /*.whatsapp-float,
     .call-float {
         width: 50px;
         height: 50px;
@@ -3170,7 +3171,7 @@ button:focus:not(:focus-visible) {
         bottom: 85px;
         right: 15px;
         left: auto;
-    }
+    }*/
     
     .whatsapp-badge {
         top: -2px;
@@ -3346,7 +3347,7 @@ button:focus:not(:focus-visible) {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    z-index: 9999;
+    z-index: 10005;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -3355,9 +3356,10 @@ button:focus:not(:focus-visible) {
 
 .floating-actions-container .whatsapp-float,
 .floating-actions-container .call-float {
-    position: relative;
-    bottom: auto;
-    right: auto;
+    position: relative !important;
+    bottom: auto !important;
+    right: auto !important;
+    left: auto !important;
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -3369,6 +3371,7 @@ button:focus:not(:focus-visible) {
     box-shadow: 0 4px 20px rgba(0,0,0,0.25);
     transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
     text-decoration: none;
+    z-index: 1;
 }
 
 .floating-actions-container .whatsapp-float {
@@ -3433,13 +3436,19 @@ button:focus:not(:focus-visible) {
         bottom: 20px;
         right: 16px;
         gap: 10px;
+        z-index: 10005;
     }
     
     .floating-actions-container .whatsapp-float,
     .floating-actions-container .call-float {
+        position: relative !important;
+        bottom: auto !important;
+        right: auto !important;
+        left: auto !important;
         width: 54px;
         height: 54px;
         font-size: 1.4rem;
+        z-index: 1;
     }
     
     .float-label {
@@ -6349,28 +6358,31 @@ button:focus:not(:focus-visible) {
         box-sizing: border-box !important;
     }
     
-    /* Fix floating buttons within safe viewport */
-    .whatsapp-float, .call-float, .scroll-top {
+    /* Fix floating buttons within safe viewport - using container system */
+    .floating-actions-container {
         position: fixed !important;
+        right: 15px !important;
+        bottom: 20px !important;
+        left: auto !important;
+        box-sizing: border-box !important;
+        z-index: 10005 !important;
+    }
+    
+    .floating-actions-container .whatsapp-float,
+    .floating-actions-container .call-float {
+        position: relative !important;
+        right: auto !important;
+        left: auto !important;
+        bottom: auto !important;
         box-sizing: border-box !important;
     }
     
-    .whatsapp-float {
-        right: 15px !important;
-        left: auto !important;
-        bottom: 20px !important;
-    }
-    
-    .call-float {
-        right: 15px !important;
-        left: auto !important;
-        bottom: 85px !important;
-    }
-    
     .scroll-top {
+        position: fixed !important;
         left: 15px !important;
         right: auto !important;
         bottom: 15px !important;
+        box-sizing: border-box !important;
     }
     
     /* Nav menu safe positioning */
