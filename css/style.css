@@ -317,9 +317,9 @@ p {
 }
 
 .logo-img {
-    height: 60px;
+    height: 45px;
     width: auto;
-    max-width: 200px;
+    max-width: 150px;
     object-fit: contain;
 }
 
@@ -2817,8 +2817,8 @@ button:focus:not(:focus-visible) {
     }
     
     .logo-img {
-        height: 45px;
-        max-width: 150px;
+        height: 35px;
+        max-width: 120px;
     }
     
     .top-bar {
