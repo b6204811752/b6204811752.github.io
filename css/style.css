@@ -123,6 +123,8 @@ p {
     touch-action: manipulation;
     user-select: none;
     -webkit-user-select: none;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .btn::before {
@@ -261,6 +263,8 @@ p {
     box-shadow: var(--shadow-md);
     z-index: 1000;
     transition: var(--transition);
+    will-change: box-shadow;
+    transform: translateZ(0);
 }
 
 .header.scrolled {
@@ -2081,6 +2085,7 @@ footer {
     visibility: hidden;
     transition: var(--transition);
     z-index: 999;
+    will-change: opacity, visibility, transform;
 }
 
 .scroll-top.show {

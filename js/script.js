@@ -1,6 +1,30 @@
 // =====================================
 // Navigation and Mobile Menu
 // =====================================
+// Performance Utilities: Debounce and Throttle
+const debounce = (func, wait) => {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+};
+
+const throttle = (func, limit) => {
+    let inThrottle;
+    return function(...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+};
+
 const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
 const navLinks = document.querySelectorAll('.nav-link');
@@ -58,14 +82,16 @@ navLinks.forEach(link => {
     });
 });
 
-// Header scroll effect
-window.addEventListener('scroll', () => {
+// Header scroll effect - Throttled for better performance
+const handleScroll = throttle(() => {
     if (window.scrollY > 100) {
         header.classList.add('scrolled');
     } else {
         header.classList.remove('scrolled');
     }
-});
+}, 100);
+
+window.addEventListener('scroll', handleScroll, { passive: true });
 
 // =====================================
 // Smooth Scrolling
@@ -301,13 +327,15 @@ faqItems.forEach(item => {
 const scrollTopBtn = document.getElementById('scrollTop');
 
 if (scrollTopBtn) {
-    window.addEventListener('scroll', () => {
+    const handleScrollTop = throttle(() => {
         if (window.pageYOffset > 300) {
             scrollTopBtn.classList.add('show');
         } else {
             scrollTopBtn.classList.remove('show');
         }
-    });
+    }, 200);
+
+    window.addEventListener('scroll', handleScrollTop, { passive: true });
 
     scrollTopBtn.addEventListener('click', () => {
         window.scrollTo({
@@ -318,22 +346,50 @@ if (scrollTopBtn) {
 }
 
 // =====================================
-// Lazy Loading Images
+// Lazy Loading Images - Optimized
 // =====================================
-const images = document.querySelectorAll('img[data-src]');
+const lazyLoadImages = () => {
+    const images = document.querySelectorAll('img[loading=\"lazy\"]');
+    
+    if ('loading' in HTMLImageElement.prototype) {
+        // Browser supports native lazy loading
+        images.forEach(img => {
+            if (img.dataset.src) {
+                img.src = img.dataset.src;
+            }
+        });
+    } else {
+        // Fallback to Intersection Observer
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                    }
+                    observer.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '50px 0px', // Start loading 50px before entering viewport
+            threshold: 0.01
+        });
 
-const imageObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const img = entry.target;
-            img.src = img.dataset.src;
-            img.removeAttribute('data-src');
-            imageObserver.unobserve(img);
-        }
-    });
-});
+        images.forEach(img => {
+            if (img.dataset.src) {
+                imageObserver.observe(img);
+            }
+        });
+    }
+};
 
-images.forEach(img => imageObserver.observe(img));
+// Execute lazy loading
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', lazyLoadImages);
+} else {
+    lazyLoadImages();
+}
 
 // =====================================
 // Dynamic Date in Footer
