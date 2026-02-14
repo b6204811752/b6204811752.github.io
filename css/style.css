@@ -312,15 +312,24 @@ p {
 }
 
 .logo a {
-    display: block;
-    line-height: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
 }
 
 .logo-img {
     height: 40px;
     width: auto;
-    max-width: 140px;
+    max-width: 50px;
     object-fit: contain;
+    flex-shrink: 0;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
 .logo h1 {
@@ -328,12 +337,14 @@ p {
     color: var(--primary-color);
     margin: 0;
     font-weight: 700;
+    line-height: 1.2;
 }
 
 .logo .tagline {
     font-size: 0.75rem;
     color: var(--text-light);
     margin: 0;
+    line-height: 1;
 }
 
 .nav-menu {
@@ -2830,9 +2841,21 @@ button:focus:not(:focus-visible) {
         padding: 0 20px;
     }
     
+    .logo a {
+        gap: 8px;
+    }
+    
     .logo-img {
         height: 30px;
-        max-width: 110px;
+        max-width: 38px;
+    }
+    
+    .logo h1 {
+        font-size: 1.1rem;
+    }
+    
+    .logo .tagline {
+        font-size: 0.65rem;
     }
     
     .top-bar {
