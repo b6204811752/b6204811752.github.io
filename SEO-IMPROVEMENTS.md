@@ -259,7 +259,7 @@ Required Submissions:
 
 ### NAP Consistency
 **Name:** Car Rental Ranchi  
-**Address:** Main Road, Ranchi, Jharkhand 834001 (Update with exact address)  
+**Address:** Main Road, Ranchi, Jharkhand 834003 (Update with exact address)  
 **Phone:** +917488341848  
 
 ---
