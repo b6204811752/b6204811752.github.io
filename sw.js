@@ -1,10 +1,11 @@
 // Service Worker for Car Rental Ranchi
-// Version 1.2.0 - Progressive Web App - Optimized February 14, 2026
+// Version 1.3.0 - Progressive Web App - Optimized February 16, 2026
+// FIX: Network-first strategy for HTML to prevent blank pages on back navigation
 
-const CACHE_NAME = 'car-rental-ranchi-v3';
-const STATIC_CACHE = 'static-v3';
-const DYNAMIC_CACHE = 'dynamic-v3';
-const IMAGE_CACHE = 'images-v3';
+const CACHE_NAME = 'car-rental-ranchi-v4';
+const STATIC_CACHE = 'static-v4';
+const DYNAMIC_CACHE = 'dynamic-v4';
+const IMAGE_CACHE = 'images-v4';
 
 const urlsToCache = [
     '/',
@@ -57,7 +58,27 @@ self.addEventListener('fetch', (event) => {
         return;
     }
     
-    // Cache first for static resources
+    // Network first for HTML pages to prevent stale cached content on back navigation
+    if (request.headers.get('accept').includes('text/html')) {
+        event.respondWith(
+            fetch(request).then((response) => {
+                // Cache the fresh response
+                const responseToCache = response.clone();
+                caches.open(DYNAMIC_CACHE).then((cache) => {
+                    cache.put(request, responseToCache);
+                });
+                return response;
+            }).catch(() => {
+                // Fallback to cache if network fails
+                return caches.match(request).then((cachedResponse) => {
+                    return cachedResponse || caches.match('/offline.html');
+                });
+            })
+        );
+        return;
+    }
+    
+    // Cache first for static resources (CSS, JS, fonts, etc.)
     event.respondWith(
         caches.match(request).then((cachedResponse) => {
             if (cachedResponse) {
