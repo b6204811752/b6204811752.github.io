@@ -2226,22 +2226,22 @@ footer {
     left: 30px !important;
     width: 56px !important;
     height: 56px !important;
-    background: var(--primary-color) !important;
-    color: var(--white) !important;
+    background: #ff6b35 !important;
+    color: #ffffff !important;
     border: none !important;
     border-radius: 50% !important;
     cursor: pointer !important;
     font-size: 1.6rem !important;
     box-shadow: 0 4px 20px rgba(255, 107, 53, 0.8), 0 0 0 4px rgba(255, 107, 53, 0.2) !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
+    opacity: 1 !important;
+    visibility: visible !important;
     transition: all 0.3s ease !important;
-    z-index: 100001 !important;
+    z-index: 999999 !important;
     will-change: opacity, visibility, transform !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    pointer-events: none !important;
+    pointer-events: auto !important;
     animation: buttonPulse 2s ease-in-out infinite !important;
 }
 
