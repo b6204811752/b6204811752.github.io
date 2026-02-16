@@ -11,7 +11,6 @@ const urlsToCache = [
     '/index.html',
     '/css/style.min.css',
     '/js/script.min.js',
-    '/favicon.svg',
     '/offline.html'
 ];
 
