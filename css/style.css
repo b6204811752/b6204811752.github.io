@@ -86,6 +86,9 @@ html {
     max-width: 100%;
     overflow-x: clip;
     overflow-y: auto;
+    /* Performance optimization */
+    -webkit-font-smoothing: subpixel-antialiased;
+    text-rendering: optimizeSpeed;
 }
 
 body {

@@ -88,75 +88,27 @@
     <!-- Performance & Resource Hints -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://images.unsplash.com">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="preload" href="css/style.min.css" as="style">
-    <link rel="preload" href="css/enhanced-3d.min.css" as="style">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" as="style">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJfecg.woff2" as="font" type="font/woff2" crossorigin>
     
     <!-- Critical CSS Inline for faster FCP -->
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}:root{--primary-color:#ff6b35;--secondary-color:#004e89;--dark-color:#1a1a2e;--white:#ffffff;--text-dark:#2d2d2d;--shadow-md:0 4px 6px rgba(0,0,0,0.1);--transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}html{scroll-behavior:smooth;font-size:16px;-webkit-font-smoothing:antialiased}body{font-family:'Poppins',sans-serif;line-height:1.6;color:var(--text-dark);background-color:var(--white);overflow-x:hidden;margin:0}.container{max-width:1200px;margin:0 auto;padding:0 20px}.top-bar{position:fixed;top:0;left:0;width:100%;background:var(--dark-color);color:var(--white);padding:10px 0;font-size:0.85rem;z-index:10003}.header{position:fixed;top:40px;left:0;width:100%;background:var(--white);box-shadow:var(--shadow-md);z-index:10002;transition:var(--transition)}.hero{position:relative;min-height:100vh;background:linear-gradient(135deg,rgba(0,78,137,0.95),rgba(255,107,53,0.85)),url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1600&h=900&fit=crop&auto=format') center/cover no-repeat;display:flex;align-items:center;padding-top:120px}.hero-content{color:var(--white)}.btn{display:inline-block;padding:14px 32px;font-size:1rem;font-weight:600;border:none;border-radius:50px;cursor:pointer;transition:var(--transition);text-transform:uppercase;min-height:48px}.btn-primary{background:var(--primary-color);color:var(--white)}.btn-primary:hover{background:#ff8c61}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
+        *{margin:0;padding:0;box-sizing:border-box}:root{--primary-color:#ff6b35;--secondary-color:#004e89;--dark-color:#1a1a2e;--white:#ffffff;--text-dark:#2d2d2d;--shadow-md:0 4px 6px rgba(0,0,0,0.1);--transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}html{scroll-behavior:smooth;font-size:16px;-webkit-font-smoothing:antialiased}body{font-family:'Poppins',sans-serif;line-height:1.6;color:var(--text-dark);background-color:var(--white);overflow-x:clip;margin:0}. container{max-width:1200px;margin:0 auto;padding:0 20px}.top-bar{position:fixed;top:0;left:0;width:100%;background:var(--dark-color);color:var(--white);padding:10px 0;font-size:0.85rem;z-index:10003}.header{position:fixed;top:40px;left:0;width:100%;background:var(--white);box-shadow:var(--shadow-md);z-index:10002;transition:var(--transition)}.hero{position:relative;min-height:100vh;background:linear-gradient(135deg,rgba(0,78,137,0.95),rgba(255,107,53,0.85)),url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&h=600&fit=crop&auto=format&q=75') center/cover no-repeat;display:flex;align-items:center;padding-top:120px}.hero-content{color:var(--white)}.btn{display:inline-block;padding:14px 32px;font-size:1rem;font-weight:600;border:none;border-radius:50px;cursor:pointer;transition:var(--transition);text-transform:uppercase;min-height:48px}.btn-primary{background:var(--primary-color);color:var(--white)}.btn-primary:hover{background:#ff8c61}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}@media(min-width:769px){.hero{background-image:linear-gradient(135deg,rgba(0,78,137,0.95),rgba(255,107,53,0.85)),url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1600&h=900&fit=crop&auto=format&q=80')}}
     </style>
     
-    <!-- Stylesheets - Critical inline above, rest deferred -->
-    <link rel="stylesheet" href="css/style.min.css" media="print" onload="this.media='all'; this.onload=null;">
-    <link rel="stylesheet" href="css/enhanced-3d.min.css" media="print" onload="this.media='all'; this.onload=null;">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'; this.onload=null;" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
-    <noscript>
-        <link rel="stylesheet" href="css/style.min.css">
-        <link rel="stylesheet" href="css/enhanced-3d.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    </noscript>
-    
-    <!-- Preload critical resources -->
-    <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJfecg.woff2" as="font" type="font/woff2" crossorigin>
-    
-    <!-- Preload critical images -->
-    <link rel="preload" href="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1600&h=900&fit=crop&auto=format" as="image" type="image/jpeg">
-    <!-- Google tag (gtag.js) -->
+    <!-- Stylesheets - Load CSS immediately -->
+    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="css/enhanced-3d.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <!-- Google tag (gtag.js) - Loaded async -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-C4DWJ25X4R"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
         gtag('config', 'G-C4DWJ25X4R');
-    </script>
-    
-    <!-- Web Vitals Tracking -->
-    <script type="module">
-        if ('PerformanceObserver' in window) {
-            // Track Largest Contentful Paint (LCP)
-            const lcpObserver = new PerformanceObserver((list) => {
-                const entries = list.getEntries();
-                const lastEntry = entries[entries.length - 1];
-                console.log('LCP:', lastEntry.renderTime || lastEntry.loadTime);
-            });
-            lcpObserver.observe({entryTypes: ['largest-contentful-paint']});
-            
-            // Track First Input Delay (FID)
-            const fidObserver = new PerformanceObserver((list) => {
-                list.getEntries().forEach(entry => {
-                    console.log('FID:', entry.processingStart - entry.startTime);
-                });
-            });
-            fidObserver.observe({entryTypes: ['first-input']});
-            
-            // Track Cumulative Layout Shift (CLS)
-            let clsScore = 0;
-            const clsObserver = new PerformanceObserver((list) => {
-                list.getEntries().forEach(entry => {
-                    if (!entry.hadRecentInput) clsScore += entry.value;
-                });
-                console.log('CLS:', clsScore);
-            });
-            clsObserver.observe({entryTypes: ['layout-shift']});
-        }
     </script>
     <!-- Schema Markup for Local Business - Enhanced -->
     <script type="application/ld+json">
@@ -701,7 +653,7 @@
                 <div class="nav-wrapper">
                     <div class="logo">
                         <a href="/">
-                            <img src="images/carrentalranchilogo.png" alt="Car Rental Ranchi Logo" class="logo-img" width="60" height="60" loading="eager">
+                            <img src="images/carrentalranchilogo.png" alt="Car Rental Ranchi Logo" class="logo-img" width="60" height="60" loading="eager" fetchpriority="high">
                             <div class="logo-text">
                                 <h1>Car Rental Ranchi</h1>
                                 <p class="tagline">Ranchi's #1 Taxi Service Since 2015</p>
