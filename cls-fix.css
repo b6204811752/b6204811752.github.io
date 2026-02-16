@@ -7,12 +7,43 @@
 /* Disable infinite pulse animations */
 .btn-whatsapp,
 .btn-call,
-.scroll-top,
 .cta-buttons .btn,
 .trust-badge,
 .feature-icon i,
 .why-icon {
     animation: none !important;
+}
+
+/* SCROLL BUTTON FIX - Keep visible, remove only infinite animation */
+.scroll-top {
+    position: fixed !important;
+    bottom: 30px !important;
+    left: 30px !important;
+    width: 56px !important;
+    height: 56px !important;
+    background: #ff6b35 !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    font-size: 1.6rem !important;
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.8), 0 0 0 4px rgba(255, 107, 53, 0.2) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    z-index: 100000 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    pointer-events: auto !important;
+    animation: none !important; /* Disable infinite pulse */
+}
+
+.scroll-top:hover {
+    background: #ff8c61 !important;
+    transform: translateY(-5px) scale(1.05) !important;
+    box-shadow: 0 8px 30px rgba(255, 107, 53, 1), 0 0 0 6px rgba(255, 107, 53, 0.3) !important;
 }
 
 /* Disable infinite bounce/shimmer/ring animations */
@@ -217,7 +248,14 @@ body.loaded * {
 
 /* But keep infinite animations disabled even after load */
 body.loaded .btn-whatsapp,
-body.loaded .btn-call,
-body.loaded .scroll-top {
+body.loaded .btn-call {
     animation: none !important;
+}
+
+/* Scroll button stays visible after load */
+body.loaded .scroll-top {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+    animation: none !important; /* Keep pulse disabled */
 }
