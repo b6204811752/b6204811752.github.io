@@ -2233,29 +2233,30 @@ footer {
     cursor: pointer !important;
     font-size: 1.6rem !important;
     box-shadow: 0 4px 20px rgba(255, 107, 53, 0.8), 0 0 0 4px rgba(255, 107, 53, 0.2) !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    transition: all 0.3s ease !important;
-    z-index: 999999 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(20px) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    z-index: 100000 !important;
     will-change: opacity, visibility, transform !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    pointer-events: auto !important;
-    animation: buttonPulse 2s ease-in-out infinite !important;
+    pointer-events: none !important;
 }
 
 .scroll-top.show {
     opacity: 1 !important;
     visibility: visible !important;
+    transform: translateY(0) !important;
     pointer-events: auto !important;
+    animation: buttonPulse 2s ease-in-out infinite !important;
 }
 
 .scroll-top:hover {
     background: #ff8c61 !important;
-    transform: translateY(-5px) scale(1.1) !important;
+    transform: translateY(-5px) scale(1.05) !important;
     box-shadow: 0 8px 30px rgba(255, 107, 53, 1), 0 0 0 6px rgba(255, 107, 53, 0.3) !important;
-    animation: none !important;
 }
 
 @keyframes buttonPulse {
@@ -3462,7 +3463,7 @@ button:focus:not(:focus-visible) {
         height: 50px;
         font-size: 1.3rem;
         box-sizing: border-box;
-        z-index: 100001 !important;
+        z-index: 100000 !important;
     }
     
     .live-chat-indicator {
@@ -6657,7 +6658,7 @@ button:focus:not(:focus-visible) {
         right: auto !important;
         bottom: 15px !important;
         box-sizing: border-box !important;
-        z-index: 100001 !important;
+        z-index: 100000 !important;
         width: 50px !important;
         height: 50px !important;
     }
