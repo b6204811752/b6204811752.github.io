@@ -95,27 +95,26 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-    <link rel="preload" href="css/style.min.css" as="style">
-    <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJfecg.woff2" as="font" type="font/woff2" crossorigin>
     
     <!-- Critical CSS Inline for faster FCP -->
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}:root{--primary-color:#ff6b35;--secondary-color:#004e89;--dark-color:#1a1a2e;--white:#ffffff;--text-dark:#2d2d2d;--shadow-md:0 4px 6px rgba(0,0,0,0.1);--transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}html{scroll-behavior:smooth;font-size:16px;-webkit-font-smoothing:antialiased}body{font-family:'Poppins',sans-serif;line-height:1.6;color:var(--text-dark);background-color:var(--white);overflow-x:clip;margin:0}. container{max-width:1200px;margin:0 auto;padding:0 20px}.top-bar{position:fixed;top:0;left:0;width:100%;background:var(--dark-color);color:var(--white);padding:10px 0;font-size:0.85rem;z-index:10003}.header{position:fixed;top:40px;left:0;width:100%;background:var(--white);box-shadow:var(--shadow-md);z-index:10002;transition:var(--transition)}.hero{position:relative;min-height:100vh;background:linear-gradient(135deg,rgba(0,78,137,0.95),rgba(255,107,53,0.85)),url('images/hero-bg-mobile.jpg') center/cover no-repeat;display:flex;align-items:center;padding-top:120px}.hero-content{color:var(--white)}.btn{display:inline-block;padding:14px 32px;font-size:1rem;font-weight:600;border:none;border-radius:50px;cursor:pointer;transition:var(--transition);text-transform:uppercase;min-height:48px}.btn-primary{background:var(--primary-color);color:var(--white)}.btn-primary:hover{background:#ff8c61}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}@media(min-width:769px){.hero{background-image:linear-gradient(135deg,rgba(0,78,137,0.95),rgba(255,107,53,0.85)),url('images/hero-bg-desktop.jpg')}}
+        *{margin:0;padding:0;box-sizing:border-box}:root{--primary-color:#ff6b35;--secondary-color:#004e89;--dark-color:#1a1a2e;--white:#ffffff;--text-dark:#2d2d2d;--shadow-md:0 4px 6px rgba(0,0,0,0.1);--transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}html{scroll-behavior:smooth;font-size:16px;-webkit-font-smoothing:antialiased}body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:var(--text-dark);background-color:var(--white);overflow-x:clip;margin:0;font-display:swap}. container{max-width:1200px;margin:0 auto;padding:0 20px}.top-bar{position:fixed;top:0;left:0;width:100%;background:var(--dark-color);color:var(--white);padding:10px 0;font-size:0.85rem;z-index:10003}.header{position:fixed;top:40px;left:0;width:100%;background:var(--white);box-shadow:var(--shadow-md);z-index:10002;transition:var(--transition)}.hero{position:relative;min-height:100vh;background:linear-gradient(135deg,rgba(0,78,137,0.95),rgba(255,107,53,0.85)),url('images/hero-bg-mobile.jpg') center/cover no-repeat;display:flex;align-items:center;padding-top:120px}.hero-content{color:var(--white)}.btn{display:inline-block;padding:14px 32px;font-size:1rem;font-weight:600;border:none;border-radius:50px;cursor:pointer;transition:var(--transition);text-transform:uppercase;min-height:48px}.btn-primary{background:var(--primary-color);color:var(--white)}.btn-primary:hover{background:#ff8c61}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}@media(min-width:769px){.hero{background-image:linear-gradient(135deg,rgba(0,78,137,0.95),rgba(255,107,53,0.85)),url('images/hero-bg-desktop.jpg')}}
     </style>
     
-    <!-- Preload Critical Resources -->
+    <!-- Preload Critical Resources for LCP & FCP -->
+    <link rel="preload" href="images/hero-bg-desktop.jpg" as="image" media="(min-width: 769px)" fetchpriority="high">
+    <link rel="preload" href="images/hero-bg-mobile.jpg" as="image" media="(max-width: 768px)" fetchpriority="high">
     <link rel="preload" href="css/style.min.css" as="style">
     <link rel="preload" href="images/carrentalranchilog.jpeg" as="image">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" as="style">
+    <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJfecg.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="dns-prefetch" href="https://images.unsplash.com">
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
     
     <!-- Stylesheets - Load CSS immediately -->
     <link rel="stylesheet" href="css/style.min.css">
     <link rel="stylesheet" href="css/enhanced-3d.min.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" media="print"onload="this.media='all'">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <!-- Google tag (gtag.js) - Loaded async -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-C4DWJ25X4R"></script>
     <script>
