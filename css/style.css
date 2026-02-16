@@ -46,6 +46,36 @@
     box-sizing: border-box;
 }
 
+/* Force GPU acceleration on animated/transitioned elements */
+[class*="fade"],
+[class*="slide"],
+[class*="float"],
+[class*="scroll"],
+.btn,
+.card,
+.service-card,
+.fleet-card,
+.fare-card,
+.why-card,
+.place-card,
+.testimonial-card,
+.info-card,
+.route-info-card,
+.faq-item,
+.nav-link,
+.hero,
+.hero-content,
+img,
+[style*="transition"],
+[style*="animation"] {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+}
+
 html {
     scroll-behavior: smooth;
     font-size: 16px;

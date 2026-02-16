@@ -2,18 +2,18 @@
 // Version 2.0.0 - Performance Optimized - February 16, 2026
 // Enhanced caching for Lighthouse 100/100 Performance
 
-const CACHE_NAME = 'car-rental-ranchi-v7-perf';
-const STATIC_CACHE = 'static-v7';
-const DYNAMIC_CACHE = 'dynamic-v7';
-const IMAGE_CACHE = 'images-v7';
+const CACHE_NAME = 'car-rental-ranchi-v8-perf';
+const STATIC_CACHE = 'static-v8';
+const DYNAMIC_CACHE = 'dynamic-v8';
+const IMAGE_CACHE = 'images-v8';
 
 const urlsToCache = [
     '/',
     '/index.html',
-    '/css/style.css',
-    '/css/enhanced-3d.css',
-    '/js/script.js',
-    '/js/enhanced-3d.js',
+    '/css/style.min.css',
+    '/css/enhanced-3d.min.css',
+    '/js/script.min.js',
+    '/js/enhanced-3d.min.js',
     '/favicon.svg',
     '/offline.html'
 ];
