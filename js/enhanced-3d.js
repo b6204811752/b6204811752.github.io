@@ -7,22 +7,6 @@
     'use strict';
 
     // =====================================
-    // IMMEDIATE CLEANUP - Remove any lingering overlays
-    // =====================================
-    (function immediateCleanup() {
-        // Remove all transition overlays immediately
-        document.querySelectorAll('.page-transition-overlay').forEach(el => {
-            el.remove();
-        });
-        
-        // Reset body styles
-        if (document.body) {
-            document.body.style.removeProperty('opacity');
-            document.body.style.opacity = '1';
-        }
-    })();
-
-    // =====================================
     // 3D Card Tilt Effect on Mouse Move
     // =====================================
     function init3DTiltEffect() {
@@ -373,61 +357,25 @@
     }
 
     // =====================================
-    // Smooth Page Transitions
+    // Smooth Page Transitions - DISABLED
     // =====================================
+    // COMPLETE DISABLE: This feature was causing persistent gradient overlay issues
+    // When navigating back to pages, the overlay would stick and block content
+    // Disabled to ensure clean, immediate page loads without interference
     function initPageTransitions() {
-        // AGGRESSIVE CLEANUP: Remove ALL existing overlays from previous navigation
+        // CLEANUP ONLY: Remove any leftover overlays from previous versions
         document.querySelectorAll('.page-transition-overlay').forEach(el => el.remove());
         
-        // Reset body styles that might persist
-        document.body.style.removeProperty('opacity');
+        // Ensure body is always fully visible and interactive
+        document.body.style.opacity = '1';
         document.body.style.removeProperty('transition');
         
-        // Add transition overlay
-        const overlay = document.createElement('div');
-        overlay.className = 'page-transition-overlay';
-        overlay.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #0c1445, #ff6b35);
-            z-index: 99999;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            display: none;
-        `;
-        document.body.appendChild(overlay);
+        // NO OVERLAY CREATION
+        // NO PAGE ANIMATIONS
+        // NO LINK INTERCEPTION
+        // Just clean, standard browser navigation
         
-        // Ensure overlay stays hidden after page loads
-        setTimeout(() => {
-            overlay.style.opacity = '0';
-            overlay.style.display = 'none';
-        }, 50);
-        
-        // Animate page entry
-        document.body.style.opacity = '0';
-        requestAnimationFrame(() => {
-            document.body.style.transition = 'opacity 0.5s ease';
-            document.body.style.opacity = '1';
-        });
-        
-        // Animate internal link clicks
-        document.querySelectorAll('a[href$=".html"]').forEach(link => {
-            link.addEventListener('click', (e) => {
-                const href = link.getAttribute('href');
-                if (href && !href.startsWith('http') && !href.startsWith('//')) {
-                    e.preventDefault();
-                    overlay.style.display = 'block';
-                    overlay.style.opacity = '1';
-                    setTimeout(() => {
-                        window.location.href = href;
-                    }, 300);
-                }
-            });
-        });
+        console.log('✅ Page transitions disabled - clean navigation mode');
     }
 
     // =====================================
