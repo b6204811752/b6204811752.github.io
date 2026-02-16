@@ -1,11 +1,11 @@
 // Service Worker for Car Rental Ranchi
-// Version 1.3.0 - Progressive Web App - Optimized February 16, 2026
-// FIX: Network-first strategy for HTML to prevent blank pages on back navigation
+// Version 1.4.0 - Progressive Web App - Optimized February 16, 2026
+// FIX: Updated cache version to force refresh of overlay fix in enhanced-3d.js
 
-const CACHE_NAME = 'car-rental-ranchi-v4';
-const STATIC_CACHE = 'static-v4';
-const DYNAMIC_CACHE = 'dynamic-v4';
-const IMAGE_CACHE = 'images-v4';
+const CACHE_NAME = 'car-rental-ranchi-v5';
+const STATIC_CACHE = 'static-v5';
+const DYNAMIC_CACHE = 'dynamic-v5';
+const IMAGE_CACHE = 'images-v5';
 
 const urlsToCache = [
     '/',

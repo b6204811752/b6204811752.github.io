@@ -7,6 +7,22 @@
     'use strict';
 
     // =====================================
+    // IMMEDIATE CLEANUP - Remove any lingering overlays
+    // =====================================
+    (function immediateCleanup() {
+        // Remove all transition overlays immediately
+        document.querySelectorAll('.page-transition-overlay').forEach(el => {
+            el.remove();
+        });
+        
+        // Reset body styles
+        if (document.body) {
+            document.body.style.removeProperty('opacity');
+            document.body.style.opacity = '1';
+        }
+    })();
+
+    // =====================================
     // 3D Card Tilt Effect on Mouse Move
     // =====================================
     function init3DTiltEffect() {
@@ -360,11 +376,12 @@
     // Smooth Page Transitions
     // =====================================
     function initPageTransitions() {
-        // Remove any existing overlay from previous navigation
-        const existingOverlay = document.querySelector('.page-transition-overlay');
-        if (existingOverlay) {
-            existingOverlay.remove();
-        }
+        // AGGRESSIVE CLEANUP: Remove ALL existing overlays from previous navigation
+        document.querySelectorAll('.page-transition-overlay').forEach(el => el.remove());
+        
+        // Reset body styles that might persist
+        document.body.style.removeProperty('opacity');
+        document.body.style.removeProperty('transition');
         
         // Add transition overlay
         const overlay = document.createElement('div');
@@ -380,13 +397,15 @@
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.3s ease;
+            display: none;
         `;
         document.body.appendChild(overlay);
         
-        // Ensure overlay is hidden after page loads
+        // Ensure overlay stays hidden after page loads
         setTimeout(() => {
             overlay.style.opacity = '0';
-        }, 100);
+            overlay.style.display = 'none';
+        }, 50);
         
         // Animate page entry
         document.body.style.opacity = '0';
@@ -401,6 +420,7 @@
                 const href = link.getAttribute('href');
                 if (href && !href.startsWith('http') && !href.startsWith('//')) {
                     e.preventDefault();
+                    overlay.style.display = 'block';
                     overlay.style.opacity = '1';
                     setTimeout(() => {
                         window.location.href = href;
