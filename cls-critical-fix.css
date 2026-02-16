@@ -203,18 +203,19 @@ i.fab {
     contain: layout style !important;
 }
 
-/* 15. DISABLE PROBLEMATIC ANIMATIONS ON LOAD */
-/* Only allow animations after page is fully stable */
-body:not(.page-loaded) * {
+/* 15. KEEP ANIMATIONS DISABLED PERMANENTLY */
+/* DO NOT re-enable animations - they cause massive CLS (0.01 → 9.34) */
+/* Animations must stay disabled for CLS <0.1 */
+
+body * {
     animation-duration: 0s !important;
     animation-delay: 0s !important;
-    transition-duration: 0s !important;
+    transition-duration: 0.15s !important;
 }
 
-/* Re-enable after load */
-body.page-loaded * {
-    animation-duration: revert;
-    transition-duration: revert;
+/* Allow only safe transitions (no layout changes) */
+a, button, .btn {
+    transition: opacity 0.15s ease, background-color 0.15s ease, color 0.15s ease !important;
 }
 
 /* 16. FIX WHATSAPP/CALL BUTTON SHIFTS */

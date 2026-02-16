@@ -240,25 +240,25 @@ img[loading="lazy"] {
     animation: none !important;
 }
 
-/* 16. CRITICAL: Disable ALL infinite animations during page load */
-/* Exclude fixed position elements that don't affect layout */
-*:not(.scroll-top):not(.whatsapp-float):not(.call-float):not(.scroll-progress) {
+/* 16. CRITICAL: KEEP ALL ANIMATIONS DISABLED */
+/* DO NOT re-enable - causes CLS to explode from 0.01 to 9.34 */
+/* Animations must stay disabled for good CLS score */
+
+* {
+    animation: none !important;
     animation-duration: 0s !important;
     animation-delay: 0s !important;
-    transition: none !important;
 }
 
-/* Re-enable animations after page fully loaded (via JS) */
-body.loaded *:not(.scroll-top):not(.whatsapp-float):not(.call-float) {
-    animation-duration: revert !important;
-    animation-delay: revert !important;
-    transition: revert !important;
+/* Allow only safe, fast transitions */
+a, button, .btn, .card {
+    transition: opacity 0.15s ease, background-color 0.15s ease !important;
 }
 
-/* But keep infinite animations disabled even after load */
-body.loaded .btn-whatsapp,
-body.loaded .btn-call {
-    animation: none !important;
+/* Scroll button can have safe transitions */
+.scroll-top {
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease !important;
 }
 
 /* End of CLS Fix */
+

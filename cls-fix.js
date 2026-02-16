@@ -1,24 +1,25 @@
-// CLS Fix - Enable animations only after page fully loaded
-// This prevents layout shifts during initial page load
+// CLS Fix - DISABLE animations that cause layout shifts
+// Keep animations disabled permanently to prevent CLS
 
 (function() {
     'use strict';
     
-    // Wait for page to fully load (including images)
+    // DO NOT re-enable animations - they cause massive CLS
+    // Animations are disabled in cls-critical-fix.css
+    
     window.addEventListener('load', function() {
-        // Small delay to ensure everything is settled
-        setTimeout(function() {
-            // Add 'loaded' class to body to re-enable animations
-            document.body.classList.add('loaded');
-            
-            console.log('✅ Page loaded - animations enabled (except infinite ones)');
-        }, 100);
+        // Only mark page as loaded for other purposes
+        // Do NOT re-enable animations
+        document.body.classList.add('page-loaded');
+        
+        console.log('✅ Page loaded - CLS protection active (animations disabled)');
     });
     
-    // Fallback: If load event takes too long, enable after DOM ready + timeout
+    // Fallback
     if (document.readyState === 'complete') {
         setTimeout(function() {
-            document.body.classList.add('loaded');
+            document.body.classList.add('page-loaded');
         }, 100);
     }
 })();
+
