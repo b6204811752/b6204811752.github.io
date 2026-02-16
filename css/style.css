@@ -2236,16 +2236,16 @@ footer {
     cursor: pointer !important;
     font-size: 1.6rem !important;
     box-shadow: 0 4px 20px rgba(255, 107, 53, 0.8), 0 0 0 4px rgba(255, 107, 53, 0.2) !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: translateY(0) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(100px) !important;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
     z-index: 100000 !important;
     will-change: opacity, visibility, transform !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    pointer-events: auto !important;
+    pointer-events: none !important;
 }
 
 .scroll-top.show {

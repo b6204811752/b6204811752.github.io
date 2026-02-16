@@ -1,0 +1,214 @@
+/* =====================================
+   PERFORMANCE BOOST CSS
+   Additional optimizations for PageSpeed
+   ===================================== */
+
+/* Optimize font rendering */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Image optimization - Force aspect-ratio on ALL images */
+img {
+    height: auto;
+    max-width: 100%;
+}
+
+.hero-image,
+.service-card-image,
+.fleet-card-image,
+.destination-card-image,
+.testimonial-image {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    content-visibility: auto;
+}
+
+.fleet-card-image {
+    aspect-ratio: 4 / 3;
+}
+
+.testimonial-image {
+    aspect-ratio: 1 / 1;
+}
+
+/* CSS Containment for better rendering performance */
+.service-card,
+.fleet-card,
+.destination-card,
+.testimonial-card,
+.feature-card {
+    contain: layout style paint;
+}
+
+/* Reduce paint area */
+.card,
+.btn {
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Only use will-change on hover to reduce memory */
+.service-card,
+.fleet-card,
+.destination-card {
+    will-change: auto;
+}
+
+.service-card:hover,
+.fleet-card:hover,
+.destination-card:hover {
+    will-change: transform;
+}
+
+/* Optimize scroll performance */
+* {
+    -webkit-overflow-scrolling: touch;
+    touch-action: manipulation;
+}
+
+html {
+    scroll-padding-top: 100px;
+}
+
+/* Reduce motion for accessibility and performance */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Optimize animations on mobile */
+@media (max-width: 768px) {
+    * {
+        animation-duration: 0.3s !important;
+    }
+    
+    /* Remove will-change on mobile to save memory */
+    .service-card:hover,
+    .fleet-card:hover,
+    .destination-card:hover {
+        will-change: auto;
+    }
+}
+
+/* Progressive enhancement - Hide non-critical elements until loaded */
+body:not(.loaded) .scroll-top,
+body:not(.loaded) .trust-badges,
+body:not(.loaded) .social-links {
+    opacity: 0;
+    pointer-events: none;
+}
+
+body.loaded .scroll-top.show,
+body.loaded .trust-badges,
+body.loaded .social-links {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.3s ease;
+}
+
+/* Optimize tap targets for mobile (min 48x48px) */
+@media (max-width: 768px) {
+    .btn,
+    .nav-link,
+    .social-link,
+    .cta-button {
+        min-height: 48px;
+        min-width: 48px;
+        padding: 12px 24px;
+    }
+    
+    .scroll-top {
+        width: 48px !important;
+        height: 48px !important;
+        bottom: 20px !important;
+        left: 20px !important;
+    }
+}
+
+/* Optimize hero image loading */
+.hero {
+    background-attachment: scroll; /* Fixed causes paint issues on mobile */
+}
+
+/* Reduce CLS from web fonts */
+.hero-title,
+.section-title {
+    font-size: 32px; /* Fallback */
+    line-height: 1.2;
+}
+
+@supports (font-size: clamp(1.5rem, 4vw, 2.5rem)) {
+    .hero-title {
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+    }
+    
+    .section-title {
+        font-size: clamp(1.25rem, 3vw, 2rem);
+    }
+}
+
+/* Optimize critical CSS - Inline above-the-fold styles */
+.top-bar {
+    content-visibility: auto;
+}
+
+.header {
+    content-visibility: auto;
+}
+
+/* Lazy load below-the-fold content */
+.testimonials-section,
+.footer {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px;
+}
+
+/* Fix layout shift from dynamic content */
+.service-grid,
+.fleet-grid,
+.destination-grid {
+    min-height: 300px;
+}
+
+/* Optimize third-party embeds */
+iframe {
+    content-visibility: auto;
+}
+
+/* Prevent flash of unstyled content */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.3s ease-in forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Critical CSS - Ensure buttons are accessible immediately */
+.btn,
+.cta-button {
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* Optimize WhatsApp button */
+.whatsapp-float,
+.call-float {
+    will-change: auto;
+}
+
+.whatsapp-float:hover,
+.call-float:hover {
+    will-change: transform;
+}
