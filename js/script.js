@@ -511,7 +511,7 @@ const scrollTopBtn = document.getElementById('scrollTop');
 
 if (scrollTopBtn) {
     const handleScrollTop = throttle(() => {
-        if (window.pageYOffset > 200) {
+        if (window.pageYOffset > 100) {
             scrollTopBtn.classList.add('show');
         } else {
             scrollTopBtn.classList.remove('show');
@@ -519,6 +519,9 @@ if (scrollTopBtn) {
     }, 200);
 
     window.addEventListener('scroll', handleScrollTop, { passive: true });
+    
+    // Check on load
+    handleScrollTop();
 
     scrollTopBtn.addEventListener('click', () => {
         window.scrollTo({

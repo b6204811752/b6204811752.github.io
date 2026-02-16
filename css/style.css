@@ -2208,14 +2208,16 @@ footer {
     transition: var(--transition);
     z-index: 10004;
     will-change: opacity, visibility, transform;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
+    pointer-events: none;
 }
 
 .scroll-top.show {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
 }
 
 .scroll-top:hover {
