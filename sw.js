@@ -1,19 +1,17 @@
 // Service Worker for Car Rental Ranchi
-// Version 2.0.1 - Scroll Button Fix - February 16, 2026
-// Enhanced caching for Lighthouse 100/100 Performance
+// Version 3.0.0 - Performance Cleanup - February 17, 2026
+// Simplified caching - removed extra CSS/JS files
 
-const CACHE_NAME = 'car-rental-ranchi-v9-perf';
-const STATIC_CACHE = 'static-v9';
-const DYNAMIC_CACHE = 'dynamic-v9';
-const IMAGE_CACHE = 'images-v9';
+const CACHE_NAME = 'car-rental-ranchi-v10';
+const STATIC_CACHE = 'static-v10';
+const DYNAMIC_CACHE = 'dynamic-v10';
+const IMAGE_CACHE = 'images-v10';
 
 const urlsToCache = [
     '/',
     '/index.html',
     '/css/style.min.css',
-    '/css/enhanced-3d.min.css',
     '/js/script.min.js',
-    '/js/enhanced-3d.min.js',
     '/favicon.svg',
     '/offline.html'
 ];

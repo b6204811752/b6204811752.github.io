@@ -2253,7 +2253,6 @@ footer {
     visibility: visible !important;
     transform: translateY(0) !important;
     pointer-events: auto !important;
-    animation: buttonPulse 2s ease-in-out infinite !important;
 }
 
 .scroll-top:hover {
@@ -6676,4 +6675,49 @@ button:focus:not(:focus-visible) {
         right: 0 !important;
         left: auto !important;
     }
+}
+
+/* =====================================
+   CLS PREVENTION - DISABLE ALL INFINITE ANIMATIONS
+   These cause Cumulative Layout Shift and hurt Core Web Vitals
+   ===================================== */
+
+/* Kill all infinite decorative animations */
+.btn-submit i,
+.whatsapp-badge,
+.live-dot,
+.floating-btn,
+.proof-icon.live-pulse,
+.car-type-badge,
+.section-title::after,
+.floating-actions-container .whatsapp-float,
+.floating-actions-container .call-float,
+.hero-section::before,
+.fare-section::before,
+.fare-card::before,
+.cta-section-city::before,
+.final-cta::before,
+.info-card:hover::before,
+.route-info-card:hover::before,
+.skeleton {
+    animation: none !important;
+}
+
+/* Remove will-change from static elements to save GPU memory */
+.btn {
+    will-change: auto;
+}
+
+/* Reserve space for lazy-loaded images to prevent layout shifts */
+img[loading="lazy"] {
+    aspect-ratio: 4 / 3;
+    background-color: #f0f0f0;
+}
+
+/* Scroll button SVG icon styling */
+.scroll-top svg {
+    width: 24px;
+    height: 24px;
+    stroke: #ffffff;
+    pointer-events: none;
 }

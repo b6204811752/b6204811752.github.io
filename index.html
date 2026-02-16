@@ -98,29 +98,16 @@
     
     <!-- Critical CSS Inline for faster FCP -->
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}:root{--primary-color:#ff6b35;--secondary-color:#004e89;--dark-color:#1a1a2e;--white:#ffffff;--text-dark:#2d2d2d;--shadow-md:0 4px 6px rgba(0,0,0,0.1);--transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}html{scroll-behavior:smooth;font-size:16px;-webkit-font-smoothing:antialiased}body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:var(--text-dark);background-color:var(--white);overflow-x:clip;margin:0;font-display:swap}. container{max-width:1200px;margin:0 auto;padding:0 20px}.top-bar{position:fixed;top:0;left:0;width:100%;background:var(--dark-color);color:var(--white);padding:10px 0;font-size:0.85rem;z-index:10003}.header{position:fixed;top:40px;left:0;width:100%;background:var(--white);box-shadow:var(--shadow-md);z-index:10002;transition:var(--transition)}.hero{position:relative;min-height:100vh;background:linear-gradient(135deg,rgba(0,78,137,0.95),rgba(255,107,53,0.85)),url('images/hero-bg-mobile.jpg') center/cover no-repeat;display:flex;align-items:center;padding-top:120px}.hero-content{color:var(--white)}.btn{display:inline-block;padding:14px 32px;font-size:1rem;font-weight:600;border:none;border-radius:50px;cursor:pointer;transition:var(--transition);text-transform:uppercase;min-height:48px}.btn-primary{background:var(--primary-color);color:var(--white)}.btn-primary:hover{background:#ff8c61}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}@media(min-width:769px){.hero{background-image:linear-gradient(135deg,rgba(0,78,137,0.95),rgba(255,107,53,0.85)),url('images/hero-bg-desktop.jpg')}}
+        *{margin:0;padding:0;box-sizing:border-box}:root{--primary-color:#ff6b35;--secondary-color:#004e89;--dark-color:#1a1a2e;--white:#ffffff;--text-dark:#2d2d2d;--shadow-md:0 4px 6px rgba(0,0,0,0.1);--transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}html{scroll-behavior:smooth;font-size:16px;-webkit-font-smoothing:antialiased}body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:var(--text-dark);background-color:var(--white);overflow-x:clip;margin:0;font-display:swap}.container{max-width:1200px;margin:0 auto;padding:0 20px}.top-bar{position:fixed;top:0;left:0;width:100%;background:var(--dark-color);color:var(--white);padding:10px 0;font-size:0.85rem;z-index:10003}.header{position:fixed;top:40px;left:0;width:100%;background:var(--white);box-shadow:var(--shadow-md);z-index:10002;transition:var(--transition)}.hero{position:relative;min-height:100vh;background:linear-gradient(135deg,rgba(0,78,137,0.95),rgba(255,107,53,0.85)),url('images/hero-bg-mobile.jpg') center/cover no-repeat;display:flex;align-items:center;padding-top:120px}.hero-content{color:var(--white)}.btn{display:inline-block;padding:14px 32px;font-size:1rem;font-weight:600;border:none;border-radius:50px;cursor:pointer;transition:var(--transition);text-transform:uppercase;min-height:48px}.btn-primary{background:var(--primary-color);color:var(--white)}.btn-primary:hover{background:#ff8c61}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}img[loading="lazy"]{aspect-ratio:4/3;background:#f0f0f0}.scroll-top{position:fixed!important;bottom:30px!important;left:30px!important;width:56px!important;height:56px!important;background:#ff6b35!important;border:none!important;border-radius:50%!important;cursor:pointer!important;opacity:0;visibility:hidden;transform:translateY(100px);z-index:100000!important;display:flex!important;align-items:center!important;justify-content:center!important;pointer-events:none;transition:all .4s cubic-bezier(.4,0,.2,1)!important}.scroll-top.show{opacity:1!important;visibility:visible!important;transform:translateY(0)!important;pointer-events:auto!important}.scroll-top svg{width:24px;height:24px;stroke:#fff;pointer-events:none}@media(min-width:769px){.hero{background-image:linear-gradient(135deg,rgba(0,78,137,0.95),rgba(255,107,53,0.85)),url('images/hero-bg-desktop.jpg')}}
     </style>
     
     <!-- Preload Critical Resources for LCP & FCP -->
     <link rel="preload" href="images/hero-bg-desktop.jpg" as="image" media="(min-width: 769px)" fetchpriority="high">
     <link rel="preload" href="images/hero-bg-mobile.jpg" as="image" media="(max-width: 768px)" fetchpriority="high">
     <link rel="preload" href="css/style.min.css" as="style">
-    <link rel="preload" href="images/carrentalranchilog.jpeg" as="image">
     
-    <!-- DNS Prefetch for critical origins only -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link rel="dns-prefetch" href="https://images.unsplash.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Stylesheets - Load CSS immediately -->
-    <!-- NUCLEAR CLS FIX FIRST - Prevents all layout shifts -->
-    <link rel="stylesheet" href="cls-nuclear-fix.css">
-    <link rel="stylesheet" href="cls-critical-fix.css">
+    <!-- Stylesheets - Single render-blocking CSS for best FCP -->
     <link rel="stylesheet" href="css/style.min.css">
-    <link rel="stylesheet" href="cls-fix.css">
-    <link rel="stylesheet" href="performance-boost.css">
-    <link rel="stylesheet" href="scroll-icon-fix.css">
-    <link rel="stylesheet" href="css/enhanced-3d.min.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all';this.onload=null" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <!-- Google tag (gtag.js) - Loaded async -->
@@ -2209,8 +2196,8 @@
     </div>
 
     <!-- Scroll to Top Button -->
-    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top" title="Back to Top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
     </button>
 
     <!-- FAQPage Schema Markup - Enhanced -->
@@ -2347,15 +2334,13 @@
     }
     </script>
 
-    <script>
-        // Mark page as loaded to enable animations
-        window.addEventListener('load', function() {
-            document.body.classList.add('page-loaded');
-        });
-    </script>
-    <script src="cls-fix.js"></script>
-    <script src="performance-boost.js"></script>
     <script src="js/script.min.js" defer></script>
-    <script src="js/enhanced-3d.min.js" defer></script>
+    <script>
+        if('serviceWorker' in navigator && location.protocol === 'https:'){
+            window.addEventListener('load',()=>{
+                navigator.serviceWorker.register('/sw.js');
+            });
+        }
+    </script>
 </body>
 </html>
