@@ -241,14 +241,15 @@ img[loading="lazy"] {
 }
 
 /* 16. CRITICAL: Disable ALL infinite animations during page load */
-* {
+/* Exclude fixed position elements that don't affect layout */
+*:not(.scroll-top):not(.whatsapp-float):not(.call-float):not(.scroll-progress) {
     animation-duration: 0s !important;
     animation-delay: 0s !important;
     transition: none !important;
 }
 
 /* Re-enable animations after page fully loaded (via JS) */
-body.loaded * {
+body.loaded *:not(.scroll-top):not(.whatsapp-float):not(.call-float) {
     animation-duration: revert !important;
     animation-delay: revert !important;
     transition: revert !important;
