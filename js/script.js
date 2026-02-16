@@ -510,6 +510,8 @@ faqItems.forEach(item => {
 const scrollTopBtn = document.getElementById('scrollTop');
 
 if (scrollTopBtn) {
+    console.log('Scroll button found and initialized');
+    
     const handleScrollTop = throttle(() => {
         if (window.pageYOffset > 300) {
             scrollTopBtn.classList.add('show');
@@ -523,12 +525,24 @@ if (scrollTopBtn) {
     // Check on load
     handleScrollTop();
 
-    scrollTopBtn.addEventListener('click', () => {
+    scrollTopBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log('Scroll button clicked!');
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         });
-    });
+    }, false);
+    
+    // Fallback for browsers that don't support smooth scroll
+    scrollTopBtn.addEventListener('click', function(e) {
+        if (!('scrollBehavior' in document.documentElement.style)) {
+            e.preventDefault();
+            window.scroll(0, 0);
+        }
+    }, false);
+} else {
+    console.error('Scroll button not found!');
 }
 
 // =====================================
