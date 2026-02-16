@@ -71,18 +71,18 @@ self.addEventListener('fetch', (event) => {
                 
                 const responseToCache = response.clone();
                 caches.open(DYNAMIC_CACHE).then((cache) => {
-                    cache.puSTATIC_CACHE, DYNAMIC_CACHE, IMAGE_CACHE];
-    
-    event.waitUntil(
-        caches.keys().then((cacheNames) => {
-            return Promise.all(
-                cacheNames.map((cacheName) => {
-                    if (!cacheWhitelist.includes(cacheName)
+                    cache.put(request, responseToCache);
+                });
+                
+                return response;
+            }).catch(() => caches.match('/offline.html'));
+        })
+    );
 });
 
 // Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
-    const cacheWhitelist = [CACHE_NAME];
+    const cacheWhitelist = [STATIC_CACHE, DYNAMIC_CACHE, IMAGE_CACHE];
     
     event.waitUntil(
         caches.keys().then((cacheNames) => {
