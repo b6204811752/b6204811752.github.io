@@ -19,7 +19,6 @@ self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(STATIC_CACHE)
             .then((cache) => {
-                console.log('Opened cache');
                 return cache.addAll(urlsToCache);
             })
     );
@@ -95,13 +94,13 @@ self.addEventListener('fetch', (event) => {
 
 // Activate event - WIPE ALL old caches to force fresh content
 self.addEventListener('activate', (event) => {
+    const currentCaches = [STATIC_CACHE, DYNAMIC_CACHE, IMAGE_CACHE, CACHE_NAME];
     event.waitUntil(
         caches.keys().then((cacheNames) => {
             return Promise.all(
                 cacheNames.map((cacheName) => {
-                    // Delete ALL old caches that don't match current version
-                    if (!cacheName.includes('-v11')) {
-                        console.log('Deleting old cache:', cacheName);
+                    // Delete ALL caches that don't match current version
+                    if (!currentCaches.includes(cacheName)) {
                         return caches.delete(cacheName);
                     }
                 })
@@ -121,15 +120,14 @@ self.addEventListener('sync', (event) => {
 
 async function syncBookings() {
     // Retrieve pending bookings from IndexedDB and sync
-    console.log('Syncing pending bookings...');
 }
 
 // Push notification support
 self.addEventListener('push', (event) => {
     const options = {
         body: event.data ? event.data.text() : 'New update from Car Rental Ranchi',
-        icon: '/favicon.svg',
-        badge: '/favicon.svg',
+        icon: '/images/favicon-192x192.png',
+        badge: '/images/favicon-48x48.png',
         vibrate: [200, 100, 200],
         data: {
             dateOfArrival: Date.now(),
@@ -158,7 +156,7 @@ self.addEventListener('notificationclick', (event) => {
     
     if (event.action === 'book') {
         event.waitUntil(
-            clients.openWindow('https://b6204811752.github.io/#booking')
+            clients.openWindow('https://carrentalranchi.com/#booking')
         );
     }
 });

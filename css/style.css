@@ -100,7 +100,6 @@ body {
     overflow-y: auto;
     -webkit-tap-highlight-color: transparent;
     text-rendering: optimizeLegibility;
-    font-display: swap;
     width: 100%;
     max-width: 100%;
     min-width: 320px;
@@ -252,10 +251,6 @@ p {
 .btn-call:hover {
     background: #e85a28;
     transform: translateY(-2px);
-}
-
-.btn-call:hover {
-    background: #ff8c61;
 }
 
 /* =====================================

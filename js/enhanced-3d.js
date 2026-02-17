@@ -374,8 +374,6 @@
         // NO PAGE ANIMATIONS
         // NO LINK INTERCEPTION
         // Just clean, standard browser navigation
-        
-        console.log('✅ Page transitions disabled - clean navigation mode');
     }
 
     // =====================================
@@ -487,8 +485,6 @@
         if (document.querySelector('.hero')) {
             initTypingAnimation();
         }
-        
-        console.log('%c🎨 3D Effects & Animations Loaded!', 'font-size: 14px; color: #ffd700; font-weight: bold;');
     }
 
     // Wait for DOM
@@ -727,8 +723,6 @@
                 const perfData = performance.getEntriesByType('navigation')[0];
                 if (perfData) {
                     const loadTime = perfData.loadEventEnd - perfData.fetchStart;
-                    console.log(`%c⚡ Page Load Time: ${(loadTime / 1000).toFixed(2)}s`, 'color: #4CAF50; font-weight: bold;');
-                    
                     // Report slow pages
                     if (loadTime > 3000) {
                         console.warn('Page load time exceeds recommended 3s threshold');
@@ -738,7 +732,6 @@
                 // Log resource timing
                 const resources = performance.getEntriesByType('resource');
                 const totalResourceTime = resources.reduce((sum, r) => sum + r.duration, 0);
-                console.log(`%c📊 Resources loaded: ${resources.length} (${(totalResourceTime / 1000).toFixed(2)}s total)`, 'color: #2196F3;');
             }, 0);
         });
     }
@@ -752,10 +745,8 @@
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('/sw.js')
                 .then(registration => {
-                    console.log('✅ Service Worker registered:', registration.scope);
                 })
                 .catch(error => {
-                    console.log('❌ Service Worker registration failed:', error);
                 });
         });
     }
@@ -927,9 +918,6 @@
             if (document.querySelector('.hero')) {
                 initTypingAnimation();
             }
-            
-            console.log('%c🎨 3D Effects & Animations Loaded!', 'font-size: 14px; color: #ffd700; font-weight: bold;');
-            console.log('%c⚡ Performance Mode: Active', 'font-size: 12px; color: #4CAF50;');
         } catch (error) {
             console.error('Error initializing enhancements:', error);
             // Graceful degradation - site still works without enhancements

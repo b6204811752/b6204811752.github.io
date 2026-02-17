@@ -1,4 +1,4 @@
-﻿// =====================================
+// =====================================
 // Navigation and Mobile Menu
 // =====================================
 // Performance Utilities: Debounce and Throttle
@@ -71,9 +71,11 @@ document.addEventListener('click', (e) => {
 // Close mobile menu when clicking on a link
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        navToggle.classList.remove('active');
-        navToggle.setAttribute('aria-expanded', 'false');
+        if (navMenu) navMenu.classList.remove('active');
+        if (navToggle) {
+            navToggle.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', 'false');
+        }
         document.body.style.overflow = '';
         
         // Update active link
@@ -84,10 +86,12 @@ navLinks.forEach(link => {
 
 // Header scroll effect - Throttled for better performance
 const handleScroll = throttle(() => {
-    if (window.scrollY > 100) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
+    if (header) {
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
     }
 }, 100);
 
@@ -165,8 +169,6 @@ if (tripTypeSelect) {
                 dropLocationInput.placeholder = 'Enter drop location';
             }
         }
-        
-        console.log('Trip type selected:', selectedType);
     });
 }
 
@@ -176,14 +178,8 @@ if (tripTypeSelect) {
 // Booking Form Submission - Google Form Integration with Hidden Iframe
 // =====================================
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('ðŸ”§ Booking form script initializing...');
-    
     const bookingForm = document.getElementById('bookingForm');
-    console.log('ðŸ“‹ Booking form found:', bookingForm ? 'YES' : 'NO');
-
     if (bookingForm) {
-        console.log('âœ… Booking form handler attached');
-        
         // Create hidden iframe for form submission (avoids CORS issues)
         let hiddenIframe = document.getElementById('hidden_iframe');
         if (!hiddenIframe) {
@@ -192,7 +188,6 @@ document.addEventListener('DOMContentLoaded', function() {
             hiddenIframe.id = 'hidden_iframe';
             hiddenIframe.style.display = 'none';
             document.body.appendChild(hiddenIframe);
-            console.log('ðŸ“¦ Hidden iframe created');
         }
         
         // Track submission status
@@ -200,12 +195,10 @@ document.addEventListener('DOMContentLoaded', function() {
         let isSubmitting = false;
         
         bookingForm.addEventListener('submit', (e) => {
-            console.log('ðŸš€ Form submit event triggered');
             e.preventDefault();
             e.stopPropagation();
             
             if (isSubmitting) {
-                console.log('âš ï¸ Already submitting, ignoring...');
                 return false;
             }
 
@@ -227,13 +220,13 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Validate mobile number
             if (!mobileNumber.match(/^[0-9]{10}$/)) {
-                alert('âŒ Please enter a valid 10-digit mobile number');
+                alert('❌ Please enter a valid 10-digit mobile number');
                 return;
             }
             
             // Validate required fields
             if (!tripType || !pickupLocation || !pickupDate || !pickupTime || !carType) {
-                alert('âŒ Please fill all required fields');
+                alert('❌ Please fill all required fields');
                 return;
             }
             
@@ -299,7 +292,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     clearTimeout(submissionTimeout);
                     
                     // Show success popup
-                    alert('âœ… SUCCESS!\n\nYour booking has been submitted successfully!\nWe will contact you soon on: ' + mobileNumber);
+                    alert('✅ SUCCESS!\n\nYour booking has been submitted successfully!\nWe will contact you soon on: ' + mobileNumber);
                     
                     // Update button state
                     submitButton.innerHTML = '<i class="fas fa-check-circle"></i> Booking Submitted!';
@@ -360,7 +353,7 @@ document.addEventListener('DOMContentLoaded', function() {
             submissionTimeout = setTimeout(() => {
                 if (isSubmitting) {
                     // Show error popup
-                    alert('âŒ SUBMISSION FAILED!\n\nThere was a problem submitting your booking.\n\nPlease try again or contact us directly via WhatsApp.');
+                    alert('❌ SUBMISSION FAILED!\n\nThere was a problem submitting your booking.\n\nPlease try again or contact us directly via WhatsApp.');
                     
                     // Update button state
                     submitButton.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Failed - Try Again';
@@ -380,14 +373,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 10000);
             
             // Submit the form
-            console.log('Submitting form to Google...');
             try {
                 tempForm.submit();
-                console.log('Form submitted! Waiting for response...');
             } catch (error) {
                 console.error('Form submission error:', error);
                 clearTimeout(submissionTimeout);
-                alert('âŒ SUBMISSION ERROR!\n\nThere was a problem submitting your booking.\n\nPlease try again or contact us directly via WhatsApp.');
+                alert('❌ SUBMISSION ERROR!\n\nThere was a problem submitting your booking.\n\nPlease try again or contact us directly via WhatsApp.');
                 
                 submitButton.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error - Try Again';
                 submitButton.style.backgroundColor = '#dc3545';
@@ -406,7 +397,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return false; // Prevent form submission
         });
     } else {
-        console.error('âŒ Booking form not found!');
+        console.error('❌ Booking form not found!');
     }
 });
 
@@ -511,8 +502,6 @@ faqItems.forEach(item => {
 const scrollTopBtn = document.getElementById('scrollTop');
 
 if (scrollTopBtn) {
-    console.log('Scroll button found and initialized');
-    
     const handleScrollTop = throttle(() => {
         if (window.pageYOffset > 300) {
             scrollTopBtn.classList.add('show');
@@ -528,7 +517,6 @@ if (scrollTopBtn) {
 
     scrollTopBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        console.log('Scroll button clicked!');
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
@@ -676,8 +664,6 @@ const callButtons = document.querySelectorAll('a[href^="tel:"]');
 callButtons.forEach(button => {
     button.addEventListener('click', () => {
         // Track call button clicks
-        console.log('Call button clicked:', button.getAttribute('href'));
-        
         // If you're using Google Analytics, you can track this:
         // gtag('event', 'click', {
         //     'event_category': 'Contact',
@@ -694,8 +680,6 @@ const whatsappButtons = document.querySelectorAll('a[href*="wa.me"]');
 whatsappButtons.forEach(button => {
     button.addEventListener('click', () => {
         // Track WhatsApp button clicks
-        console.log('WhatsApp button clicked');
-        
         // If you're using Google Analytics:
         // gtag('event', 'click', {
         //     'event_category': 'Contact',
@@ -840,7 +824,7 @@ if (calcBtn) {
         const carRate = document.getElementById('calcCar').value;
         
         if (!kmInput || !kmInput.value) {
-            alert('âš ï¸ Please enter distance in kilometers');
+            alert('⚠️ Please enter distance in kilometers');
             kmInput.focus();
             return;
         }
@@ -849,20 +833,20 @@ if (calcBtn) {
         
         // Validation
         if (km <= 0) {
-            alert('âš ï¸ Please enter a valid distance (greater than 0 km)');
+            alert('⚠️ Please enter a valid distance (greater than 0 km)');
             kmInput.focus();
             return;
         }
         
         if (km > 1000) {
-            alert('âš ï¸ Maximum distance is 1000 km. For longer trips, please contact us directly.');
+            alert('⚠️ Maximum distance is 1000 km. For longer trips, please contact us directly.');
             kmInput.focus();
             return;
         }
         
         const rate = parseFloat(carRate);
         
-        // Simple calculation: KM Ã— Rate
+        // Simple calculation: KM × Rate
         const totalFare = km * rate;
         
         // Get vehicle name for display
@@ -870,12 +854,12 @@ if (calcBtn) {
         const carName = carSelect.options[carSelect.selectedIndex].text;
         
         // Display result with animation
-        fareAmount.textContent = `â‚¹${Math.round(totalFare).toLocaleString()}`;
+        fareAmount.textContent = `₹${Math.round(totalFare).toLocaleString()}`;
         
         // Show calculation breakdown
         if (fareDetails) {
             fareDetails.innerHTML = `
-                <strong>Calculation:</strong> ${km} km Ã— â‚¹${rate}/km = â‚¹${Math.round(totalFare).toLocaleString()}<br>
+                <strong>Calculation:</strong> ${km} km × ₹${rate}/km = ₹${Math.round(totalFare).toLocaleString()}<br>
                 <strong>Vehicle:</strong> ${carName}
             `;
         }
@@ -886,7 +870,6 @@ if (calcBtn) {
         fareResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         
         // Log for debugging
-        console.log(`Fare Calculated: ${km} km Ã— â‚¹${rate}/km = â‚¹${Math.round(totalFare)}`);
     });
     
     // Allow Enter key to calculate
@@ -925,25 +908,7 @@ if (liveBookings) {
 // =====================================
 // Keyboard Shortcuts
 // =====================================
-document.addEventListener('keydown', (e) => {
-    // Press 'C' to open call
-    if (e.key === 'c' && !e.ctrlKey && !e.metaKey) {
-        const callButton = document.querySelector('a[href^="tel:"]');
-        if (callButton && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
-            e.preventDefault();
-            callButton.click();
-        }
-    }
-    
-    // Press 'W' to open WhatsApp
-    if (e.key === 'w' && !e.ctrlKey && !e.metaKey) {
-        const whatsappButton = document.querySelector('.whatsapp-float');
-        if (whatsappButton && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
-            e.preventDefault();
-            whatsappButton.click();
-        }
-    }
-});
+// Keyboard Shortcuts - REMOVED (hijacked 'c' and 'w' keys during normal typing)
 
 // =====================================
 // Print Functionality
@@ -964,7 +929,6 @@ const shareWebsite = async () => {
                 url: window.location.href
             });
         } catch (err) {
-            console.log('Error sharing:', err);
         }
     } else {
         // Fallback: Copy to clipboard
@@ -979,8 +943,6 @@ const shareWebsite = async () => {
 window.addEventListener('load', () => {
     // Calculate and log page load time
     const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
-    console.log('Page loaded in:', loadTime, 'ms');
-    
     // If using Google Analytics, you can send this data:
     // gtag('event', 'timing_complete', {
     //     'name': 'load',
@@ -993,27 +955,20 @@ window.addEventListener('load', () => {
 // Offline Detection
 // =====================================
 window.addEventListener('online', () => {
-    console.log('Back online');
     // You can show a notification here
 });
 
 window.addEventListener('offline', () => {
-    console.log('Connection lost');
     alert('You are currently offline. Some features may not work properly.');
 });
 
 // =====================================
 // Console Welcome Message
 // =====================================
-console.log('%cðŸš— Car Rental Ranchi', 'font-size: 20px; font-weight: bold; color: #ff6b35;');
-console.log('%cWelcome to our website! Need a taxi? Call us at +917488341848', 'font-size: 14px; color: #004e89;');
-
 // =====================================
 // Initialize everything when DOM is ready
 // =====================================
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Website initialized successfully!');
-    
     // Any additional initialization code can go here
 });
 
@@ -1124,48 +1079,7 @@ function initLightbox() {
 
 window.addEventListener('load', initLightbox);
 
-// Animated Counter
-function animateCounter(element, target, duration = 2000) {
-    let current = 0;
-    const increment = target / (duration / 16);
-    
-    const updateCounter = () => {
-        current += increment;
-        if (current < target) {
-            element.textContent = Math.floor(current).toLocaleString();
-            requestAnimationFrame(updateCounter);
-        } else {
-            element.textContent = target.toLocaleString();
-        }
-    };
-    
-    updateCounter();
-}
-
-// Initialize counters when visible
-function initCounters() {
-    const counters = document.querySelectorAll('.stat-number');
-    const observerOptions = {
-        threshold: 0.5,
-        rootMargin: '0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-                entry.target.classList.add('counted');
-                const target = parseInt(entry.target.getAttribute('data-target'));
-                if (!isNaN(target)) {
-                    animateCounter(entry.target, target);
-                }
-            }
-        });
-    }, observerOptions);
-    
-    counters.forEach(counter => observer.observe(counter));
-}
-
-window.addEventListener('load', initCounters);
+// Animated Counter - REMOVED (duplicate of animateCounters/IntersectionObserver above)
 
 // Reading Time Estimator
 function calculateReadingTime() {
@@ -1186,22 +1100,7 @@ function calculateReadingTime() {
 
 window.addEventListener('load', calculateReadingTime);
 
-// Smooth Scroll for Anchor Links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href !== '#' && href !== '#!' && document.querySelector(href)) {
-            e.preventDefault();
-            const target = document.querySelector(href);
-            const offsetTop = target.offsetTop - 80;
-            
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
+// Smooth Scroll for Anchor Links - REMOVED (duplicate of handler at top of file)
 
 // Share on Social Media
 function shareOnSocial(platform) {
@@ -1323,7 +1222,3 @@ function detectDevice() {
 }
 
 window.addEventListener('load', detectDevice);
-
-console.log('%câœ¨ Enhanced UI/UX Features Loaded!', 'font-size: 14px; color: #4facfe; font-weight: bold;');
-
-
