@@ -1060,33 +1060,8 @@ function revealOnScroll() {
 window.addEventListener('scroll', revealOnScroll);
 window.addEventListener('load', revealOnScroll);
 
-// Back to Top Button
-function createBackToTopButton() {
-    if (!document.querySelector('.back-to-top')) {
-        const backToTop = document.createElement('div');
-        backToTop.className = 'back-to-top';
-        backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
-        backToTop.setAttribute('aria-label', 'Back to top');
-        document.body.appendChild(backToTop);
-        
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    }
-    
-    const backToTop = document.querySelector('.back-to-top');
-    if (window.pageYOffset > 300) {
-        backToTop.classList.add('visible');
-    } else {
-        backToTop.classList.remove('visible');
-    }
-}
-
-window.addEventListener('scroll', createBackToTopButton);
-window.addEventListener('load', createBackToTopButton);
+// Back to Top Button - REMOVED (duplicate of #scrollTop static button)
+// Using the static HTML .scroll-top button instead
 
 // Floating WhatsApp Button - DISABLED (Using HTML static buttons instead to avoid duplicates)
 // function createFloatingWhatsApp() {
