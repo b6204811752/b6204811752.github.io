@@ -1,10 +1,10 @@
 // Service Worker for Car Rental Ranchi
-// Version 4.0.6 - Network-first for all resources - February 17, 2026
+// Version 4.0.7 - Network-first for all resources - February 17, 2026
 
-const CACHE_NAME = 'car-rental-ranchi-v19';
-const STATIC_CACHE = 'static-v19';
-const DYNAMIC_CACHE = 'dynamic-v19';
-const IMAGE_CACHE = 'images-v19';
+const CACHE_NAME = 'car-rental-ranchi-v20';
+const STATIC_CACHE = 'static-v20';
+const DYNAMIC_CACHE = 'dynamic-v20';
+const IMAGE_CACHE = 'images-v20';
 
 const urlsToCache = [
     '/',
