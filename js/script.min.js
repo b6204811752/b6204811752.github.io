@@ -31,7 +31,7 @@ const navLinks = document.querySelectorAll('.nav-link');
 const header = document.getElementById('header');
 
 // Toggle mobile menu with accessibility
-if (navToggle) {
+if (navToggle && navMenu) {
     navToggle.addEventListener('click', () => {
         const isActive = navMenu.classList.toggle('active');
         navToggle.classList.toggle('active');
