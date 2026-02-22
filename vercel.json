@@ -57,11 +57,6 @@
       "source": "/index.html",
       "destination": "/",
       "permanent": true
-    },
-    {
-      "source": "https://www.carrentalranchi.com/:path*",
-      "destination": "https://carrentalranchi.com/:path*",
-      "permanent": true
     }
   ],
   "cleanUrls": true,
