@@ -8,7 +8,6 @@ const IMAGE_CACHE = 'images-v23';
 
 const urlsToCache = [
     '/',
-    '/index.html',
     '/css/style.min.css',
     '/js/script.min.js',
     '/offline.html'
@@ -156,7 +155,7 @@ self.addEventListener('notificationclick', (event) => {
     
     if (event.action === 'book') {
         event.waitUntil(
-            clients.openWindow('https://carrentalranchi.com/#booking')
+            clients.openWindow('https://www.carrentalranchi.com/#booking')
         );
     }
 });
