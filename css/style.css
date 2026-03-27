@@ -3909,11 +3909,18 @@ button:focus:not(:focus-visible) {
 
 .feature-badge i {
     font-size: 2rem;
-    background: linear-gradient(135deg, #ffd700, #ffed4e, #ffa500);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #ffd700;
     filter: drop-shadow(0 2px 4px rgba(255,215,0,0.3));
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+    .feature-badge i {
+        background: linear-gradient(135deg, #ffd700, #ffed4e, #ffa500);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+    }
 }
 
 .feature-badge div {
@@ -4242,13 +4249,21 @@ button:focus:not(:focus-visible) {
 .fare-card .fare-price {
     font-size: 2.4rem;
     font-weight: 800;
-    background: linear-gradient(135deg, var(--primary-color), #ff5722, #ffd700);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--primary-color);
     margin-bottom: 12px;
     line-height: 1.2;
     padding: 10px 0;
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+    .fare-card > .fare-price,
+    .fare-card .fare-price {
+        background: linear-gradient(135deg, var(--primary-color), #ff5722, #ffd700);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+    }
 }
 
 /* Route Info Section */
@@ -4341,12 +4356,20 @@ button:focus:not(:focus-visible) {
 .route-info-card i {
     font-size: 2.8rem;
     margin-bottom: 18px;
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color), #ffd700);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--primary-color);
     display: inline-block;
     transition: transform 0.4s ease;
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+    .info-card i,
+    .route-info-card i {
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color), #ffd700);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+    }
 }
 
 .info-card:hover i,
@@ -4392,10 +4415,17 @@ button:focus:not(:focus-visible) {
 .route-description h3 {
     font-size: 1.5rem;
     margin-bottom: 18px;
-    background: linear-gradient(135deg, var(--dark-color), var(--secondary-color), var(--primary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--dark-color);
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+    .route-description h3 {
+        background: linear-gradient(135deg, var(--dark-color), var(--secondary-color), var(--primary-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+    }
 }
 
 .route-description p {
@@ -4511,12 +4541,20 @@ button:focus:not(:focus-visible) {
 .why-card-city i {
     font-size: 3rem;
     margin-bottom: 20px;
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color), #ffd700);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--primary-color);
     display: inline-block;
     transition: all 0.4s ease;
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+    .why-card i,
+    .why-card-city i {
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color), #ffd700);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+    }
 }
 
 .why-card:hover i,
@@ -5443,13 +5481,20 @@ button:focus:not(:focus-visible) {
     font-size: 2.4rem;
     text-align: center;
     margin-bottom: 15px;
-    background: linear-gradient(135deg, var(--dark-color) 0%, var(--secondary-color) 50%, var(--primary-color) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--dark-color);
     position: relative;
     padding-bottom: 25px;
     letter-spacing: -0.5px;
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+    .section-title {
+        background: linear-gradient(135deg, var(--dark-color) 0%, var(--secondary-color) 50%, var(--primary-color) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+    }
 }
 
 .section-title::after {
@@ -5637,12 +5682,19 @@ button:focus:not(:focus-visible) {
 .fare-details .fare-price .price {
     font-size: 2.4rem;
     font-weight: 800;
-    background: linear-gradient(135deg, var(--primary-color), #ff5722, #ffd700);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--primary-color);
     display: block;
     line-height: 1.2;
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+    .fare-details .fare-price .price {
+        background: linear-gradient(135deg, var(--primary-color), #ff5722, #ffd700);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+    }
 }
 
 .fare-details .fare-price .per-km {
@@ -5856,12 +5908,19 @@ button:focus:not(:focus-visible) {
 .place-card > i {
     font-size: 2.8rem;
     margin-bottom: 18px;
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color), #ffd700);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--primary-color);
     display: inline-block;
     transition: transform 0.4s ease;
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+    .place-card > i {
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color), #ffd700);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+    }
 }
 
 .place-card:hover > i {
@@ -5924,12 +5983,19 @@ button:focus:not(:focus-visible) {
 .fare-icon {
     font-size: 3.2rem;
     margin-bottom: 20px;
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color), #ffd700);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--primary-color);
     display: inline-block;
     transition: all 0.4s ease;
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+    .fare-icon {
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color), #ffd700);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+    }
 }
 
 .fare-card:hover .fare-icon {
@@ -6027,13 +6093,20 @@ button:focus:not(:focus-visible) {
 
 .section-header h2 {
     font-size: 2.4rem;
-    background: linear-gradient(135deg, var(--dark-color) 0%, var(--secondary-color) 50%, var(--primary-color) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--dark-color);
     margin-bottom: 12px;
     position: relative;
     padding-bottom: 18px;
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+    .section-header h2 {
+        background: linear-gradient(135deg, var(--dark-color) 0%, var(--secondary-color) 50%, var(--primary-color) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+    }
 }
 
 .section-header h2::after {

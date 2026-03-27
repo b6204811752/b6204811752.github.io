@@ -192,14 +192,21 @@
 }
 
 .hero-title {
-    background: linear-gradient(135deg, #ffffff, #ffd700, #ffffff);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: shimmer 4s linear infinite;
+    color: #ffffff;
     will-change: background-position;
     transform: translateZ(0);
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+    .hero-title {
+        background: linear-gradient(135deg, #ffffff, #ffd700, #ffffff);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+        animation: shimmer 4s linear infinite;
+    }
 }
 
 .hero-subtitle {
@@ -421,10 +428,7 @@
 
 .stat-card i {
     font-size: 3rem;
-    background: linear-gradient(135deg, #ffd700, #ff6b35);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #ffd700;
     margin-bottom: 15px;
     animation: float 3s ease-in-out infinite;
 }
@@ -432,10 +436,18 @@
 .stat-number {
     font-size: 3.5rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #ffffff, #ffd700);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #ffffff;
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+    .stat-number {
+        background: linear-gradient(135deg, #ffffff, #ffd700);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+        display: inline-block;
+    }
 }
 
 /* =====================================
@@ -802,10 +814,18 @@ thead {
 }
 
 .about-feature i {
-    background: linear-gradient(135deg, #28a745, #20c997);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #28a745;
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+    .about-feature i {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+        display: inline-block;
+    }
 }
 
 /* =====================================
@@ -819,10 +839,17 @@ thead {
 
 .testimonial-card::before {
     font-size: 8rem;
-    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(0, 78, 137, 0.05));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: rgba(255, 107, 53, 0.1);
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+    .testimonial-card::before {
+        background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(0, 78, 137, 0.05));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+    }
 }
 
 .google-rating .rating-badge {
@@ -944,10 +971,17 @@ thead {
 }
 
 .cta-section-city h2 {
-    background: linear-gradient(135deg, #ffffff, #ffd700);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #ffffff;
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+    .cta-section-city h2 {
+        background: linear-gradient(135deg, #ffffff, #ffd700);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+    }
 }
 
 /* =====================================
@@ -990,12 +1024,19 @@ thead {
 }
 
 .city-hero-title {
-    background: linear-gradient(135deg, #ffffff, #ffd700, #ffffff);
-    background-size: 300% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: shimmer 4s linear infinite;
+    color: #ffffff;
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+    .city-hero-title {
+        background: linear-gradient(135deg, #ffffff, #ffd700, #ffffff);
+        background-size: 300% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+        animation: shimmer 4s linear infinite;
+    }
 }
 
 /* =====================================
@@ -1289,10 +1330,18 @@ thead {
 }
 
 .area-column h3 {
-    background: linear-gradient(135deg, var(--dark-color), var(--secondary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--dark-color);
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+    .area-column h3 {
+        background: linear-gradient(135deg, var(--dark-color), var(--secondary-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+        display: inline-block;
+    }
 }
 
 /* =====================================
@@ -1309,10 +1358,18 @@ thead {
 }
 
 .payment-method i {
-    background: linear-gradient(135deg, var(--primary-color), #ff8c61);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--primary-color);
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+    .payment-method i {
+        background: linear-gradient(135deg, var(--primary-color), #ff8c61);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+        display: inline-block;
+    }
 }
 
 .payment-note {
@@ -1431,11 +1488,19 @@ thead {
 }
 
 .destination-gallery .section-header h2 {
-    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--secondary-color);
     font-size: 2.2rem;
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+    .destination-gallery .section-header h2 {
+        background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+        display: inline-block;
+    }
 }
 
 .gallery-grid {
@@ -1654,8 +1719,7 @@ thead {
 .service-card,
 .fleet-card,
 .fare-card,
-.testimonial-card,
-.stat-card {
+.testimonial-card {
     contain: layout style paint;
 }
 
@@ -1906,7 +1970,8 @@ section {
 @font-face {
     font-family: 'Poppins';
     font-display: swap;
-    /* This ensures text is visible while fonts load */
+    font-weight: 400;
+    src: url('/fonts/poppins-400.woff2') format('woff2');
 }
 
 /* =====================================
@@ -1937,39 +2002,20 @@ html {
 }
 
 /* =====================================
-   CLS PREVENTION - Disable all infinite animations
-   These cause Cumulative Layout Shift
+   CLS PREVENTION - Use proper sizing instead of disabling animations
+   Animations are essential for the premium look & feel
    ===================================== */
+/* Prevent CLS by ensuring animated elements have fixed dimensions */
 .hero,
-.hero::after,
-.hero .container::before,
-.hero .container::after,
-.hero-title,
-.hero-subtitle,
-.fare-card.featured,
-.service-card::before,
-.booking-form-card::before,
-.service-icon,
-.service-icon::after,
-.why-card-city:hover i,
 .stats-section,
-.stat-card i,
-.section-header h2::after,
-.btn-submit,
-.social-proof-banner,
-.fleet-badge.premium,
-.about-badge,
-.contact-info,
-.cta-section-city,
-.cta-section-city::before,
-.city-hero::before,
-.city-hero-title,
-.place-number,
-.footer::before,
-.whatsapp-float,
-.float-btn,
-.float-btn::after,
-.scroll-progress-bar,
-.skeleton-loader {
-    animation: none !important;
+.social-proof-banner {
+    min-height: 1px; /* Ensure layout stability */
+    contain: layout style;
 }
+
+.service-icon,
+.about-badge {
+    /* Fixed dimensions prevent CLS during float animation */
+    flex-shrink: 0;
+}
+
